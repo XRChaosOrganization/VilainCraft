@@ -10,6 +10,7 @@ public class TileComponent : MonoBehaviour , IPointerEnterHandler , IPointerExit
     public GameObject buildingPreview;
     public GameObject buildingPrefab;
     bool onPreview;
+    bool buildable = true;
 
     private void Update()
     {
@@ -31,6 +32,7 @@ public class TileComponent : MonoBehaviour , IPointerEnterHandler , IPointerExit
             {
                 buildingPreview.GetComponent<BuildingComponent>().buildingMeshs[i].material.color = Color.white;
             }
+            
             hasBuilding = true;
             onPreview = false;
             buildingPreview = null;
@@ -45,11 +47,39 @@ public class TileComponent : MonoBehaviour , IPointerEnterHandler , IPointerExit
             this.gameObject.GetComponent<MeshRenderer>().material.color = Color.yellow;
             onPreview = true;
             buildingPreview = (GameObject)Instantiate(buildingPrefab, transform.position, Quaternion.identity);
-            for (int i = 0; i < buildingPreview.GetComponent<BuildingComponent>().buildingMeshs.Count; i++)
-            {
-                buildingPreview.GetComponent<BuildingComponent>().buildingMeshs[i].material.color = Color.green;
-            }
             
+            foreach (Transform child in buildingPreview.transform)
+            {
+                for (int i = 0; i < GameManager.gm.tilesList.Count; i++)
+                {
+                    if (child.transform.position + Vector3.up *0.5f == GameManager.gm.tilesList[i].transform.position)
+                    {
+                        if (GameManager.gm.tilesList[i].GetComponent<TileComponent>().hasBuilding == true)
+                        {
+                            buildable = false;
+                            break;
+                        }
+                        else
+                        {
+                            buildable = true;
+                        }
+                    }
+                }
+            }
+            if (buildable == true)
+            {
+                for (int i = 0; i < buildingPreview.GetComponent<BuildingComponent>().buildingMeshs.Count; i++)
+                {
+                    buildingPreview.GetComponent<BuildingComponent>().buildingMeshs[i].material.color = Color.green;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < buildingPreview.GetComponent<BuildingComponent>().buildingMeshs.Count; i++)
+                {
+                    buildingPreview.GetComponent<BuildingComponent>().buildingMeshs[i].material.color = Color.red;
+                }
+            }
         }
     }
 
