@@ -4,15 +4,5 @@ using UnityEngine;
 
 public class BuildingComponent : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public List<MeshRenderer> buildingMeshs;
 }
