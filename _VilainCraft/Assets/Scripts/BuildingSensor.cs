@@ -10,11 +10,18 @@ public class BuildingSensor : MonoBehaviour
     {
         parentBuildingComponent = GetComponentInParent<BuildingComponent>();
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other != null)
         {
             parentBuildingComponent.buildable = false;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other!=null)
+        {
+            parentBuildingComponent.buildable = true;
         }
     }
 }

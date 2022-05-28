@@ -22,38 +22,41 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
 
-        // CHANGER SYSTEME D'INSTANCIATION !!!!!!
-        if (isBuilding && currentSelectedTile != null)
+        if (isBuilding && buildingPreview!= null && currentSelectedTile != null)
         {
-            if (buildingPreview.GetComponent<BuildingComponent>().buildable == true)
+            BuildingComponent _currentBC = buildingPreview.GetComponent<BuildingComponent>();
+            if (_currentBC.buildable == true)
             {
-                for (int i = 0; i < buildingPreview.GetComponent<BuildingComponent>().buildingMeshs.Count; i++)
+                for (int i = 0; i < _currentBC.buildingMeshs.Count; i++)
                 {
-                    buildingPreview.GetComponent<BuildingComponent>().buildingMeshs[i].material.color = Color.green;
+                    _currentBC.buildingMeshs[i].material.color = Color.green;
                 }
             }
             else
             {
-                for (int i = 0; i < buildingPreview.GetComponent<BuildingComponent>().buildingMeshs.Count; i++)
+                for (int i = 0; i < _currentBC.buildingMeshs.Count; i++)
                 {
-                    buildingPreview.GetComponent<BuildingComponent>().buildingMeshs[i].material.color = Color.red;
+                    _currentBC.buildingMeshs[i].material.color = Color.red;
                 }
             }
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && _currentBC.buildable == true)
             {
-                for (int i = 0; i < buildingPreview.GetComponent<BuildingComponent>().buildingMeshs.Count; i++)
+                for (int i = 0; i < _currentBC.buildingMeshs.Count; i++)
                 {
-                    buildingPreview.GetComponent<BuildingComponent>().buildingMeshs[i].material.color = Color.white;
+                    _currentBC.buildingMeshs[i].material.color = Color.white;
                 }
-                BoxCollider[] cols = buildingPreview.GetComponentsInChildren<BoxCollider>();
-                for (int i = 0; i < cols.Length; i++)
+                Rigidbody[] rbs;
+                rbs = buildingPreview.GetComponentsInChildren<Rigidbody>();
+                for (int i = 0; i < rbs.Length; i++)
                 {
-                    cols[i].isTrigger = false;
+                    rbs[i].constraints = RigidbodyConstraints.FreezePosition;
                 }
-                
                 buildingPreview = null;
+            }
+            if (Input.GetMouseButtonDown(1))
+            {
+                Destroy(buildingPreview);
                 isBuilding = false;
-
             }
             if (Input.mouseScrollDelta.y > 0 )
             {
