@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 1464032367678820276}
   - component: {fileID: 8629436903030578109}
   - component: {fileID: 8454410127517574055}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Cylinder (4)
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,7 +97,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000001, y: 10, z: 1.0000004}
+  m_Size: {x: 1.0000001, y: 3, z: 1.0000004}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8629436903030578109
 MonoBehaviour:
@@ -112,6 +112,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentBuildingComponent: {fileID: 0}
+  relatedSensors:
+  - {fileID: 5295352180873117193}
+  - {fileID: 5522235755591796516}
+  - {fileID: 5559657980791343265}
+  - {fileID: 8260633176698661068}
+  - {fileID: 8629436903030578109}
+  sensorsContainer: {fileID: 4083237585312217540}
 --- !u!54 &8454410127517574055
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -142,9 +149,9 @@ GameObject:
   - component: {fileID: 4844490192552983877}
   - component: {fileID: 5559657980791343265}
   - component: {fileID: 3051527752009920509}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Cylinder (2)
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -225,7 +232,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000001, y: 10, z: 1.0000004}
+  m_Size: {x: 1.0000001, y: 3, z: 1.0000004}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5559657980791343265
 MonoBehaviour:
@@ -240,6 +247,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentBuildingComponent: {fileID: 0}
+  relatedSensors:
+  - {fileID: 5295352180873117193}
+  - {fileID: 5522235755591796516}
+  - {fileID: 5559657980791343265}
+  - {fileID: 8260633176698661068}
+  - {fileID: 8629436903030578109}
+  sensorsContainer: {fileID: 4083237585312217540}
 --- !u!54 &3051527752009920509
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -266,9 +280,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2277458500125341165}
   - component: {fileID: 8733993813067211685}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: BuildingTestenT
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -286,6 +300,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4083237585312217540}
+  - {fileID: 5698074532141838555}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -317,9 +332,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4083237585312217540}
-  m_Layer: 7
-  m_Name: Skin
-  m_TagString: Untagged
+  m_Layer: 2
+  m_Name: SensorsContainer
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -344,6 +359,37 @@ Transform:
   m_Father: {fileID: 2277458500125341165}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6362904735901021215
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5698074532141838555}
+  m_Layer: 0
+  m_Name: Skin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5698074532141838555
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6362904735901021215}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2277458500125341165}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6518995803317569452
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,9 +404,9 @@ GameObject:
   - component: {fileID: 5175450405286485025}
   - component: {fileID: 8260633176698661068}
   - component: {fileID: 3420601612359189528}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Cylinder (3)
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -441,7 +487,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000001, y: 10, z: 1.0000004}
+  m_Size: {x: 1.0000001, y: 3, z: 1.0000004}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8260633176698661068
 MonoBehaviour:
@@ -456,6 +502,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentBuildingComponent: {fileID: 0}
+  relatedSensors:
+  - {fileID: 5295352180873117193}
+  - {fileID: 5522235755591796516}
+  - {fileID: 5559657980791343265}
+  - {fileID: 8260633176698661068}
+  - {fileID: 8629436903030578109}
+  sensorsContainer: {fileID: 4083237585312217540}
 --- !u!54 &3420601612359189528
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -486,9 +539,9 @@ GameObject:
   - component: {fileID: 7814841801378659032}
   - component: {fileID: 5522235755591796516}
   - component: {fileID: 3848127439108013915}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Cylinder (1)
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -569,7 +622,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000001, y: 10, z: 1.0000004}
+  m_Size: {x: 1.0000001, y: 3, z: 1.0000004}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5522235755591796516
 MonoBehaviour:
@@ -584,6 +637,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentBuildingComponent: {fileID: 0}
+  relatedSensors:
+  - {fileID: 5295352180873117193}
+  - {fileID: 5522235755591796516}
+  - {fileID: 5559657980791343265}
+  - {fileID: 8260633176698661068}
+  - {fileID: 8629436903030578109}
+  sensorsContainer: {fileID: 4083237585312217540}
 --- !u!54 &3848127439108013915
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -614,9 +674,9 @@ GameObject:
   - component: {fileID: 4389486498984311887}
   - component: {fileID: 5295352180873117193}
   - component: {fileID: 6660416044610632053}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -697,7 +757,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000001, y: 10, z: 1.0000004}
+  m_Size: {x: 1.0000001, y: 3, z: 1.0000004}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5295352180873117193
 MonoBehaviour:
@@ -712,6 +772,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentBuildingComponent: {fileID: 0}
+  relatedSensors:
+  - {fileID: 5295352180873117193}
+  - {fileID: 5522235755591796516}
+  - {fileID: 5559657980791343265}
+  - {fileID: 8260633176698661068}
+  - {fileID: 8629436903030578109}
+  sensorsContainer: {fileID: 4083237585312217540}
 --- !u!54 &6660416044610632053
 Rigidbody:
   m_ObjectHideFlags: 0
