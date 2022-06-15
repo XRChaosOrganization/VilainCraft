@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ad210ef46cc00e347ab559a049971aa4
+guid: 0b8792e6855bab94f9a6d0a792390b5f
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
@@ -8,27 +8,27 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Dirt
-    second: {fileID: 2100000, guid: f847541a2f7df4740998966f81d6e668, type: 2}
+    second: {fileID: 2100000, guid: d43bce4d3bde6424b90a340dace459d5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Grass
-    second: {fileID: 2100000, guid: 4fbc27bbbfb0300498e76100bd7a8833, type: 2}
+    second: {fileID: 2100000, guid: 3e5043cecaea1d5419fd0a4ac1ca5e9f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: m_Rocks.001
-    second: {fileID: 2100000, guid: f1bd9c1673d0fcb4f949f09afdc12ca1, type: 2}
+    second: {fileID: 2100000, guid: 32d19d614ef999e4893ce83ddecce764, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: m_Rocks.002
-    second: {fileID: 2100000, guid: a4015b504b306494fb99d2340346b599, type: 2}
+    second: {fileID: 2100000, guid: 01273731b3c355b47bf0bc8d3c0faa52, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: m_Rocks.003
-    second: {fileID: 2100000, guid: 28062cb6a60bf6f43be49d5d100a876b, type: 2}
+    second: {fileID: 2100000, guid: 17af506ab926c0647b20cfb960720ff0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

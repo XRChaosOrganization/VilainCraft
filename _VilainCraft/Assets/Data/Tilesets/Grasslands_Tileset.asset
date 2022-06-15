@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f20eb4a73a92dcd41a6cafe4d290a939, type: 3}
+  m_Name: Grasslands_Tileset
+  m_EditorClassIdentifier: 
+  terrain:
+  - {fileID: 5649870168857912578, guid: 4ca790646a533df4ca9d9253d1819d09, type: 3}
+  - {fileID: 7526832101827418711, guid: be1b4584051756340bb20e3c5881fac3, type: 3}
+  - {fileID: 7008866614162962047, guid: d32c2416c23d2b349aa6ca01823d279e, type: 3}
+  - {fileID: 5926348604048314861, guid: 480701b2990ad4544845c278c3042d8f, type: 3}
