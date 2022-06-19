@@ -6,4 +6,5 @@ using UnityEngine;
 public class Tileset : ScriptableObject
 {
     public List<GameObject> terrain;
+    public List<GameObject> water;
 }

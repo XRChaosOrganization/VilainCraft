@@ -17,6 +17,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Water
+    second: {fileID: 2100000, guid: 56ccec927f6bc8049bb86dff7e22aedb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: m_Rocks.001
     second: {fileID: 2100000, guid: 32d19d614ef999e4893ce83ddecce764, type: 2}
   - first:
