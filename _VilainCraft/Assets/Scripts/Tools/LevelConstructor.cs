@@ -8,11 +8,17 @@ using UnityEngine.U2D;
 public class CellData
 {
     public enum Type { Terrain, Water }
+    
 
     public Vector3 position;
     public int height;
     public Type type;
     public bool isBuildable;
+
+
+    public Dictionary<string, bool> waterCullingMask = new Dictionary<string, bool>();
+    
+    
 
     public CellData(Vector3 _pos, int _height, Type _type)
     {
@@ -22,6 +28,8 @@ public class CellData
         isBuildable = type == Type.Water ? true : false;
         
     }
+
+
 }
 
 [System.Serializable]
@@ -91,18 +99,38 @@ public class LevelConstructor : MonoBehaviour
                 int step = 256 / (tileset.terrain.Count + 1);
                 int height = (int)(color.r *256 / step);
 
-
-                _data.Add(new CellData(
-                    position, 
-                    height, 
-                    texture.GetPixel(x + (int)waterRect.x, y + (int)waterRect.y).b >= 0.3 ? CellData.Type.Water : CellData.Type.Terrain)
+                CellData _cellData = new CellData(
+                    position,
+                    height,
+                    texture.GetPixel(x + (int)waterRect.x, y + (int)waterRect.y).b >= 0.3 ? CellData.Type.Water : CellData.Type.Terrain
                     );
+
+                if (_cellData.type == CellData.Type.Water)
+                {
+                    int faces = 0;
+
+                    _cellData.waterCullingMask.Add("X-", (int)(texture.GetPixel(x + (int)heightRect.x - 1, y + (int)heightRect.y).r * 256 / step) == 0);
+                    faces += (int)(texture.GetPixel(x + (int)heightRect.x - 1, y + (int)heightRect.y).r * 256 / step) == 0 ? 1 : 0 ;
+                    _cellData.waterCullingMask.Add("X+", (int)(texture.GetPixel(x + (int)heightRect.x + 1, y + (int)heightRect.y).r * 256 / step) == 0);
+                    faces += (int)(texture.GetPixel(x + (int)heightRect.x + 1, y + (int)heightRect.y).r * 256 / step) == 0 ? 1 : 0;
+                    _cellData.waterCullingMask.Add("Z-", (int)(texture.GetPixel(x + (int)heightRect.x, y + (int)heightRect.y - 1).r * 256 / step) == 0);
+                    faces += (int)(texture.GetPixel(x + (int)heightRect.x, y + (int)heightRect.y -1).r * 256 / step) == 0 ? 1 : 0;
+                    _cellData.waterCullingMask.Add("Z+", (int)(texture.GetPixel(x + (int)heightRect.x, y + (int)heightRect.y + 1).r * 256 / step) == 0);
+                    faces += (int)(texture.GetPixel(x + (int)heightRect.x, y + (int)heightRect.y +1).r * 256 / step) == 0 ? 1 : 0;
+
+                    Debug.Log(faces);
+
+                }
+
+                _data.Add(_cellData);
 
             }
         }
 
         return _data;
     }
+
+
 
     void PlaceTiles(List<CellData> _data)
     {
@@ -112,44 +140,63 @@ public class LevelConstructor : MonoBehaviour
             return;
         }
 
-        foreach (var item in _data)
+        for (int i = 0; i < _data.Count; i++)
         {
-            if (item.height > 0)
+            if (_data[i].height > 0)
             {
                 int direction = Random.Range(0, 4);
                 float varianceCheck = Random.Range(0f, 1f);
-                int variantIndex = Random.Range(1, 4);
+                int variantIndex = Random.Range(0, 3);
                 GameObject instance;
 
-                switch (item.type)
+                switch (_data[i].type)
                 {
                     case CellData.Type.Terrain:
-                        instance = PrefabUtility.InstantiatePrefab(tileset.terrain[item.height - 1], tileContainer) as GameObject;
+                        instance = PrefabUtility.InstantiatePrefab(tileset.terrain[_data[i].height - 1], tileContainer) as GameObject;
+                        instance.transform.rotation = Quaternion.Euler(0f, 90f * direction, 0f);
                         break;
+
                     case CellData.Type.Water:
-                        instance = PrefabUtility.InstantiatePrefab(tileset.water[item.height - 1], tileContainer) as GameObject;
+                        instance = PrefabUtility.InstantiatePrefab(tileset.water[_data[i].height - 1], tileContainer) as GameObject;
+                        GenerateWaterBorders(_data[i], instance);       
                         break;
+
                     default:
                         instance = null;
-                        Debug.LogError("Tile " + item.position + " Type not recognized");
+                        Debug.LogError("Tile " + _data[i].position + " Type not recognized");
                         return;
 
                 }
 
-                instance.transform.position = item.position;
-                instance.transform.rotation = Quaternion.Euler(0f, 90f * direction, 0f);
+                instance.transform.position = _data[i].position;
+                
 
                 if (varianceCheck <= (float)variance / 100)
                 {
-                    MeshRenderer[] mr = instance.GetComponentsInChildren<MeshRenderer>();
-                    mr[variantIndex].enabled = true;
+                    Transform container = instance.transform.Find("Variants");
+                    if (container != null)
+                    {
+                        MeshRenderer[] mr = container.GetComponentsInChildren<MeshRenderer>();
+                        mr[variantIndex].enabled = true;
+                    }
+                    
                 }
             }
 
         }
     }
 
-
+    void GenerateWaterBorders(CellData _item, GameObject _instance)
+    {
+        foreach (var valuePair in _item.waterCullingMask)
+        {
+            if (valuePair.Value)
+            {
+                Transform face = _instance.transform.Find(valuePair.Key);
+                face.GetComponent<MeshRenderer>().enabled = true;
+            }
+        }
+    }
 
     #endregion
 }
