@@ -7,14 +7,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water_mat
-  m_Shader: {fileID: -6465566751694194690, guid: c8e593327a4e75545b0756fc39932624, type: 3}
+  m_Name: Waterfall_mat
+  m_Shader: {fileID: -6465566751694194690, guid: ac3b5fc473145a64fa086fad2c44bf6b, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -35,13 +35,13 @@ Material:
     m_Ints: []
     m_Floats:
     - _Alpha: 1
-    - _Depth: 1.85
+    - _Depth: 2.73
     - _Distance: -38.5
     - _FarPlaneScale: 14.12
-    - _FoamAmount: 2.99
-    - _FoamCutoff: 2.96
-    - _FoamScale: 1.44
-    - _FoamSpeed: 1.11
+    - _FoamAmount: 0
+    - _FoamCutoff: 2.25
+    - _FoamScale: 3.18
+    - _FoamSpeed: 2
     - _Intensity: 2.18
     - _Metallic: 0
     - _NormalPower: 0

@@ -426,11 +426,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_MosaicSpriteImportData.Array.data[0].m_Rect.width
-    value: 25
+    value: 20
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_MosaicSpriteImportData.Array.data[0].m_Rect.height
-    value: 25
+    value: 20
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_MosaicSpriteImportData.Array.data[0].m_SpriteID
@@ -518,15 +518,15 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_MosaicSpriteImportData.Array.data[1].m_Rect.y
-    value: 37
+    value: 32
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_MosaicSpriteImportData.Array.data[1].m_Rect.width
-    value: 25
+    value: 20
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_MosaicSpriteImportData.Array.data[1].m_Rect.height
-    value: 25
+    value: 20
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_MosaicSpriteImportData.Array.data[1].m_SpriteID
@@ -570,7 +570,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_MosaicSpriteImportData.Array.data[1].uvTransform.y
-    value: 37
+    value: 32
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_RigSpriteImportData.Array.size
@@ -1010,7 +1010,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_ResliceFromLayer
-    value: 0
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_MosaicPSDLayers.Array.size
@@ -1082,7 +1082,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_MosaicPSDLayers.Array.data[1].m_LayerID
-    value: 1
+    value: 4
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_MosaicPSDLayers.Array.data[1].m_MosaicPosition.x
@@ -1090,7 +1090,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_MosaicPSDLayers.Array.data[1].m_MosaicPosition.y
-    value: 37
+    value: 32
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_MosaicPSDLayers.Array.data[1].m_Flatten

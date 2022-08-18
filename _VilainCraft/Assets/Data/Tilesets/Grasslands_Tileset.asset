@@ -12,13 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f20eb4a73a92dcd41a6cafe4d290a939, type: 3}
   m_Name: Grasslands_Tileset
   m_EditorClassIdentifier: 
-  terrain:
-  - {fileID: 8388609294403375248, guid: 4ca790646a533df4ca9d9253d1819d09, type: 3}
-  - {fileID: 3874584471945862691, guid: be1b4584051756340bb20e3c5881fac3, type: 3}
-  - {fileID: 8706575625863791933, guid: d32c2416c23d2b349aa6ca01823d279e, type: 3}
-  - {fileID: 7791985717982571824, guid: 480701b2990ad4544845c278c3042d8f, type: 3}
+  ground:
+  - {fileID: 1725498875613512866, guid: 92e72b54a26849642b43b6ac830b5a85, type: 3}
+  - {fileID: 5776933901932804940, guid: a6ed97da7cdeca34e9e7b7c1f000b09f, type: 3}
+  - {fileID: 1347675040785907385, guid: 9537bd84cac474146959203915b170fc, type: 3}
+  - {fileID: 1065174433496659681, guid: f5912da2e868c4342b455e988a0ab9b4, type: 3}
+  groundVariants:
+  - {fileID: 7986345063753911777, guid: 32737f26d68e4e54c832fdd215778b9c, type: 3}
+  - {fileID: 2707749796937873823, guid: dbaa97ec88cb8964f8477156021b325f, type: 3}
+  - {fileID: 3896904783630303429, guid: 7103cce37b537c542b8ab7edccc65e8c, type: 3}
+  - {fileID: 8948987971774908521, guid: e903985b83c5d7e499280bab6526463c, type: 3}
   water:
-  - {fileID: 985354465202118487, guid: 53857da3beb44984fafb5a499a7377c0, type: 3}
-  - {fileID: 1110769841410461460, guid: b96c890f240af2a4c8017e58fa2c5771, type: 3}
-  - {fileID: 8353458178872834281, guid: 22b42f3715de26345989c3525279ff8a, type: 3}
-  - {fileID: 3547784998582264258, guid: 059e9f600d6effb4d90e0f78665b1a88, type: 3}
+  - {fileID: 1859063143319405472, guid: 00aab38b07f677445a6c528387cda59d, type: 3}
+  - {fileID: 3511176893453400368, guid: 691ce7ccd07327f4984ef8433238c166, type: 3}
+  - {fileID: 3072378863040974466, guid: 8011ec58c2e9beb46a91f4ece32f26d6, type: 3}
+  - {fileID: 5392155049754059928, guid: b2babf0394ddf6141aa00a81be9e7779, type: 3}
