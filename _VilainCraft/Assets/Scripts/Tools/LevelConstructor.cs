@@ -110,7 +110,6 @@ public class LevelConstructor : MonoBehaviour
                     Transform baseTile = instance.transform.Find("Model");
                     Transform water = instance.transform.Find("Water");
                     baseTile.rotation = Quaternion.Euler(0f, 90f * direction, 0f);
-                    //AdjacentTiles adjA = GridUtilities.GetAdjacentTiles(gm.grid, gridPos);
 
                     foreach (Tile _tile in adj)
                     {
@@ -121,7 +120,8 @@ public class LevelConstructor : MonoBehaviour
                             if (_tile.height < pair.Value.height)
                             {
                                 Transform edges = water.Find("Edges");
-                                Transform t = null;
+                                Transform _t = null;
+                                List<GameObject> w_tilesetList = null;
                                 int i = GridUtilities.GetDirectionIndex(pointer);
 
 
@@ -140,33 +140,42 @@ public class LevelConstructor : MonoBehaviour
                                         (GridUtilities.GetAdjacentFromIndex(adj, i == 7 ? 0 : i + 1).type == Tile.Tile_Type.Ground &&
                                         GridUtilities.GetAdjacentFromIndex(adj, i == 7 ? 0 : i + 1).height == pair.Value.height)))
                                     {
-                                        Transform side = edges.GetChild(i);
-                                        t = side.Find("Out");
+                                        
+                                        _t = edges.GetChild(i);
+                                        w_tilesetList = tileset.waterfall.cornerOut;
                                     }
                                     // Conditions to detect In Corner
                                     else if (GridUtilities.GetAdjacentFromIndex(adj, i - 1).height == pair.Value.height &&
                                         GridUtilities.GetAdjacentFromIndex(adj, i == 7 ? 0 : i + 1).height == pair.Value.height)
-                                    {
-                                        Transform side = edges.GetChild(i);
-                                        t = side.Find("In");
+                                    { 
+                                        _t = edges.GetChild(i);
+                                        w_tilesetList = tileset.waterfall.cornerIn;
                                     }
 
                                 }
                                 else // i is Even => Tiles in Cardinal (Up = 0, Right = 2, Down = 4, Left = 6)
                                 {
-                                    if (GridUtilities.GetAdjacentFromIndex(adj, i == 0 ? 7 : i - 1).height == pair.Value.height || 
+                                    if (GridUtilities.GetAdjacentFromIndex(adj, i == 0 ? 7 : i - 1).height == pair.Value.height ||
                                         GridUtilities.GetAdjacentFromIndex(adj, i == 7 ? 0 : i + 1).height == pair.Value.height)
-                                        t = null;
-                                    else t = edges.GetChild(i);
-                                } 
+                                        _t = null;
+                                    else 
+                                    {
+                                        _t = edges.GetChild(i);
+                                        w_tilesetList = tileset.waterfall.straight;
+                                    }
+                                    
+                                }
 
 
-                                if (t != null)
+                                if (_t != null && w_tilesetList != null)
                                 {
                                     int h = pair.Value.height - _tile.height;
                                     for (int j = 0; j < h + 1; j++)
-                                        t.GetChild(j).GetComponent<MeshRenderer>().enabled = true;
-                                    t.GetChild(1).position += Vector3.up * (-h + 2) * tileSize;
+                                    {
+                                        GameObject _instance = PrefabUtility.InstantiatePrefab(w_tilesetList[j > 2 ? 2 : j], _t) as GameObject;
+                                        _instance.transform.rotation = Quaternion.Euler(0f, 90f * (i / 2), 0f);
+                                        _instance.transform.position += Vector3.down * tileSize * (j == 0 ? 0: (j >= 2 ? j-1 : h));
+                                    }
                                 }          
                             }
                         }
@@ -182,6 +191,7 @@ public class LevelConstructor : MonoBehaviour
             {
                 instance.transform.position = new Vector3(gridPos.x * tileSize, 0, gridPos.y * tileSize);
                 instance.GetComponent<TileComponent>().gridPos = gridPos;
+                pair.Value.associatedGO = instance;
             }
                 
             

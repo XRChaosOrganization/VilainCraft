@@ -15,6 +15,7 @@ public class Tile
     public Vector2 gridPos;
     public int height;
     public bool isBuildable;
+    public GameObject associatedGO;
     
     
 
