@@ -17,10 +17,11 @@ public class MapData
 public class LevelConstructor : MonoBehaviour
 {
     public int tileSize;
-
     public Tileset tileset;
-    public Transform tileContainer;
     public MapData mapData;
+    [HideInInspector] public Transform levelContainer;
+    [HideInInspector] public Transform tileContainer;
+    [HideInInspector] public Transform cameraRig;
 
     GridManager gm;
 
@@ -206,9 +207,66 @@ public class LevelConstructor : MonoBehaviour
 
     #region Map Generation
 
+    public void PlaceCamera()
+    {
+        if (cameraRig)
+        {
+            Vector3 pos = new Vector3();
+            pos.x = mapData.heightMap.rect.width * tileSize / 2;
+            pos.y = cameraRig.position.y;
+            pos.z = mapData.heightMap.rect.height * tileSize / 2;
+            cameraRig.position = pos;
+        }
+        else Debug.LogWarning("Failed To place Camera. levelConstructor.cameraRig null reference exception");
+    }
+
+
+    public void GenerateContainer()
+    {
+        if (!levelContainer)
+        {
+            GameObject lc = GameObject.Find("LevelContainer");
+            if (lc)
+                levelContainer = lc.transform;
+            else
+            {
+                GameObject go = new GameObject("LevelContainer");
+                levelContainer = go.transform;
+            }
+            
+        }
+
+        Transform tc = levelContainer.Find("TileContainer");
+        if (tc)
+        {
+            tileContainer = tc;
+        }
+        else
+        {
+            GameObject go = new GameObject("TileContainer");
+            go.transform.SetParent(levelContainer);
+            tileContainer = go.transform;
+        }
+
+        Transform cr = levelContainer.Find("OrthographicCameraRig");
+        if (cr)
+        {
+            cameraRig = cr;
+        }
+        else
+        {
+            
+            GameObject cam = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Camera/OrthographicCameraRig.prefab");
+            GameObject camInstance = null;
+            camInstance = PrefabUtility.InstantiatePrefab(cam, levelContainer) as GameObject;
+            cameraRig = camInstance.transform;
+        }
+    }
+
     public void GenerateTerrain()
     {
-
+        if (!tileContainer)
+            GenerateContainer();
         if (tileContainer.childCount > 0)
             ClearTerrain();
 
@@ -216,12 +274,15 @@ public class LevelConstructor : MonoBehaviour
 
         ReadMapData();
         PlaceTiles();
+        PlaceCamera();
 
     }
 
     public void ClearTerrain()
     {
         Debug.ClearDeveloperConsole();
+        if (!tileContainer)
+            GenerateContainer();
         for (int i = tileContainer.childCount - 1; i >= 0; --i)
         {
             if (Application.isEditor)
