@@ -585,6 +585,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1388911033}
     m_Modifications:
+    - target: {fileID: 7352710396725620297, guid: 9aeaeb123c83fa24d99532644900c631, type: 3}
+      propertyPath: m_SoftZoneWidth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7352710396725620297, guid: 9aeaeb123c83fa24d99532644900c631, type: 3}
+      propertyPath: m_SoftZoneHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7352710396725620297, guid: 9aeaeb123c83fa24d99532644900c631, type: 3}
+      propertyPath: m_VerticalDamping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7352710396725620297, guid: 9aeaeb123c83fa24d99532644900c631, type: 3}
+      propertyPath: m_HorizontalDamping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7352710396725620298, guid: 9aeaeb123c83fa24d99532644900c631, type: 3}
+      propertyPath: m_ZDamping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7352710396725620298, guid: 9aeaeb123c83fa24d99532644900c631, type: 3}
+      propertyPath: m_PathPosition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7352710396725620298, guid: 9aeaeb123c83fa24d99532644900c631, type: 3}
+      propertyPath: m_PositionUnits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7352710397306568675, guid: 9aeaeb123c83fa24d99532644900c631, type: 3}
+      propertyPath: m_Resolution
+      value: 26
+      objectReference: {fileID: 0}
     - target: {fileID: 7352710397329422224, guid: 9aeaeb123c83fa24d99532644900c631, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -633,17 +665,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: OrthographicCameraRig
       objectReference: {fileID: 0}
+    - target: {fileID: 7352710397535703833, guid: 9aeaeb123c83fa24d99532644900c631, type: 3}
+      propertyPath: m_StandbyUpdate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7352710397535703834, guid: 9aeaeb123c83fa24d99532644900c631, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.89253926
+      objectReference: {fileID: 0}
     - target: {fileID: 7352710397535703834, guid: 9aeaeb123c83fa24d99532644900c631, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.23859407
       objectReference: {fileID: 0}
     - target: {fileID: 7352710397535703834, guid: 9aeaeb123c83fa24d99532644900c631, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.36970186
+      value: 0.36970186
       objectReference: {fileID: 0}
     - target: {fileID: 7352710397535703834, guid: 9aeaeb123c83fa24d99532644900c631, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0988289
+      value: -0.0988289
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9aeaeb123c83fa24d99532644900c631, type: 3}
@@ -10568,9 +10608,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1016943129}
   - component: {fileID: 1016943128}
+  - component: {fileID: 1016943132}
   - component: {fileID: 1016943127}
   - component: {fileID: 1016943130}
   - component: {fileID: 1016943131}
+  - component: {fileID: 1016943133}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -10636,8 +10678,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1016943126}
-  m_LocalRotation: {x: 0.23859407, y: -0.36970186, z: 0.0988289, w: 0.89253926}
-  m_LocalPosition: {x: 190, y: 120, z: -90}
+  m_LocalRotation: {x: 0.23859407, y: 0.36970186, z: -0.0988289, w: 0.89253926}
+  m_LocalPosition: {x: -90, y: 120, z: -90}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10711,6 +10753,89 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1016943132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016943126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cce7e8153efbcec4b9bcb2b3e6a43d54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationLerp:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 3.2516418
+      outSlope: 3.2516418
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.030495556
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.08315859
+      outSlope: 0.08315859
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.25552016
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  lerpSpeed: 7
+--- !u!114 &1016943133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016943126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: fb0a9ffe290b7d74b984bdae22fa562a, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1016943132}
+        m_TargetAssemblyTypeName: LevelCameraComponent, Assembly-CSharp
+        m_MethodName: Rotate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0d087489-7e65-4f8a-95fc-10b284de6b0f
+    m_ActionName: CameraControls/Rotate[/Keyboard/a,/Keyboard/e]
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: KeyboardAndMouse
+  m_DefaultActionMap: CameraControls
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1001 &1022816144
 PrefabInstance:
   m_ObjectHideFlags: 0
