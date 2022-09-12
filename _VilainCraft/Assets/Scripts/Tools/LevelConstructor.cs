@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using Cinemachine;
 
 
 
@@ -45,7 +46,7 @@ public class LevelConstructor : MonoBehaviour
                 Vector2 gridPos = new Vector2(x, y);
                 Color color = texture.GetPixel(x + (int)heightRect.x, y + (int)heightRect.y);
                 int step = 256 / (tileset.ground.Count + 1);
-                int height = (int)(color.r * 256 / step);
+                int height = (int) Mathf.Clamp((color.r * 256 / step), 0, tileset.ground.Count) ;
 
                 if (texture.GetPixel(x + (int)waterRect.x, y + (int)waterRect.y).b >= 0.3)
                     tile = new Tile_Water(gridPos, height);
@@ -114,10 +115,10 @@ public class LevelConstructor : MonoBehaviour
 
                     foreach (Tile _tile in adj)
                     {
-                        Vector2 pointer = _tile.gridPos - pair.Key;
-
                         if (_tile != null && _tile.type == Tile.Tile_Type.Water)
                         {
+                            Vector2 pointer = _tile.gridPos - pair.Key;
+
                             if (_tile.height < pair.Value.height)
                             {
                                 Transform edges = water.Find("Edges");
@@ -216,6 +217,10 @@ public class LevelConstructor : MonoBehaviour
             pos.y = cameraRig.position.y;
             pos.z = mapData.heightMap.rect.height * tileSize / 2;
             cameraRig.position = pos;
+            CinemachineVirtualCamera vcam = cameraRig.GetComponentInChildren<CinemachineVirtualCamera>();
+            LevelCameraComponent levelCam = cameraRig.GetComponent<LevelCameraComponent>();
+            levelCam.zoomFarthest = Mathf.Max(mapData.heightMap.rect.width, mapData.heightMap.rect.height) * 1.5f + 9f; //Equation size = 1.5x + 9 comes from linear interpolation after experimenting 
+            vcam.m_Lens.OrthographicSize = levelCam.zoomFarthest;
         }
         else Debug.LogWarning("Failed To place Camera. levelConstructor.cameraRig null reference exception");
     }
@@ -257,9 +262,9 @@ public class LevelConstructor : MonoBehaviour
         {
             
             GameObject cam = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Camera/OrthographicCameraRig.prefab");
-            GameObject camInstance = null;
-            camInstance = PrefabUtility.InstantiatePrefab(cam, levelContainer) as GameObject;
+            GameObject camInstance = PrefabUtility.InstantiatePrefab(cam, levelContainer) as GameObject; 
             cameraRig = camInstance.transform;
+            
         }
     }
 

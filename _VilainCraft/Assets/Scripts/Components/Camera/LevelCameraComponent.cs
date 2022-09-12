@@ -6,28 +6,30 @@ using UnityEngine.InputSystem;
 
 public class LevelCameraComponent : MonoBehaviour
 {
-    CinemachineBrain camBrain;
-    CinemachineVirtualCamera activeCam;
+    CinemachineVirtualCamera cam;
     CinemachineTrackedDolly dolly;
 
     public AnimationCurve rotationLerp;
     public float lerpSpeed;
+    public float zoomStep;
+    [HideInInspector] public static float zoomClosest = 18;
+    [HideInInspector] public float zoomFarthest;
 
     private void Start()
     {
-        camBrain = GetComponent<CinemachineBrain>();
-        activeCam = camBrain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineVirtualCamera>();
-        dolly = activeCam.GetCinemachineComponent<CinemachineTrackedDolly>();
+        cam = GetComponentInChildren<CinemachineVirtualCamera>();
+        dolly = cam.GetCinemachineComponent<CinemachineTrackedDolly>();
     }
 
     public void Rotate(InputAction.CallbackContext context)
     {
-        if (context.started)
-        {
-            float value = context.ReadValue<float>();
-            StartCoroutine(RotateCoroutine(value > 0 ? 1 : -1));
-        }
-        
+        float value = context.ReadValue<float>();
+        StartCoroutine(RotateCoroutine(value > 0 ? 1 : -1));
+    }
+
+    public void Zoom(float z)
+    {
+        cam.m_Lens.OrthographicSize = Mathf.Clamp(cam.m_Lens.OrthographicSize + z * zoomStep, zoomClosest, zoomFarthest);
     }
 
     IEnumerator RotateCoroutine(int i)
