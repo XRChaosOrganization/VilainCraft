@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1236563643648440953}
   - component: {fileID: 9011299874538018194}
   - component: {fileID: 2498027815962262531}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Waterfall_Straight_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8516301066953308361}
   - component: {fileID: 1792871548853141200}
   - component: {fileID: 4500516996481225758}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Waterfall_CornerOut_Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}

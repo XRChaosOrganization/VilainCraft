@@ -10,7 +10,8 @@ Material:
   m_Name: ToonOutline
   m_Shader: {fileID: -6465566751694194690, guid: 4664a38787fa13f4fb111163e0bc2ee7, type: 3}
   m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -34,11 +35,25 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Distance: 60
+    - _AlphaClip: 0
+    - _Blend: 0
+    - _CastShadows: 0
+    - _Cull: 2
+    - _DecalMeshBiasType: 0
+    - _DecalMeshDepthBias: 0
+    - _DecalMeshViewBias: 0
+    - _Distance: 400
+    - _DrawOrder: 0
+    - _DstBlend: 10
     - _Outline_Pixel: 1
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _SrcBlend: 5
+    - _Surface: 1
     - _Test: 60
+    - _ZTest: 4
+    - _ZWrite: 0
+    - _ZWriteControl: 0
     m_Colors:
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

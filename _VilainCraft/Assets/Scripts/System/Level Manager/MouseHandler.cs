@@ -15,8 +15,8 @@ public class MouseHandler : MonoBehaviour
 
         public Tile_MO(RaycastHit hit)
         {
-            tile_gridCell_sr = hit.collider.GetComponentInChildren<SpriteRenderer>();
             tileComponent = hit.collider.GetComponentInParent<TileComponent>();
+            tile_gridCell_sr = tileComponent.tile_gridCell_sr;
             worldPos = tileComponent.transform.position;
             GridManager.current.grid.TryGetValue(tileComponent.gridPos, out tile);
             tileAnchor = worldPos + Vector3.up * tile.height * 4;

@@ -73,16 +73,16 @@ MonoBehaviour:
       RenderQueueType: 0
       LayerMask:
         serializedVersion: 2
-        m_Bits: 64
+        m_Bits: 320
       PassNames: []
     overrideMaterial: {fileID: 2100000, guid: b22829d704a47b64f80bc14a862c8ad8, type: 2}
     overrideMaterialPassIndex: 0
     overrideDepthState: 0
-    depthCompareFunction: 4
+    depthCompareFunction: 7
     enableWrite: 1
     stencilSettings:
       overrideStencilState: 0
-      stencilReference: 0
+      stencilReference: 15
       stencilCompareFunction: 8
       passOperation: 0
       failOperation: 0
@@ -91,4 +91,4 @@ MonoBehaviour:
       overrideCamera: 0
       restoreCamera: 1
       offset: {x: 0, y: 0, z: 0, w: 0}
-      cameraFieldOfView: 60
+      cameraFieldOfView: 64

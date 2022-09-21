@@ -6,6 +6,23 @@ using UnityEngine.EventSystems;
 public class TileComponent : MonoBehaviour /*, IPointerEnterHandler , IPointerExitHandler*/  
 {
     public Vector2 gridPos;
+    public SpriteRenderer tile_gridCell_sr;
+
+    private void Awake()
+    {
+        tile_gridCell_sr = GetComponentInChildren<SpriteRenderer>();
+    }
+    private void Start()
+    {
+        GameEvents.current.onDisplayGrid += DisplayGrid;
+    }
+
+    public void DisplayGrid(bool b)
+    {
+        tile_gridCell_sr.enabled = b;
+    }
+
+
     //public void OnPointerEnter(PointerEventData eventData)
     //{
     //    if (UIManager.current.isBuilding)
