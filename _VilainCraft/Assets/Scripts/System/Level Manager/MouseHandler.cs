@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MouseHandler : MonoBehaviour
 {
+    public static MouseHandler current;
+
     [System.Serializable]
     public class Tile_MO
     {
@@ -12,6 +14,7 @@ public class MouseHandler : MonoBehaviour
         public Vector3 tileAnchor;
         public Tile tile;
         public SpriteRenderer tile_gridCell_sr;
+        
 
         public Tile_MO(RaycastHit hit)
         {
@@ -29,6 +32,11 @@ public class MouseHandler : MonoBehaviour
     Collider tileCol;
 
     //Ajouter un Header pour les Buildings
+
+    private void Awake()
+    {
+        current = this;
+    }
 
     private void Update()
     {

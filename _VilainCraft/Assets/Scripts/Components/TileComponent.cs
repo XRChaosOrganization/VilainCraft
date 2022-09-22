@@ -17,6 +17,11 @@ public class TileComponent : MonoBehaviour /*, IPointerEnterHandler , IPointerEx
         GameEvents.current.onDisplayGrid += DisplayGrid;
     }
 
+    private void OnDestroy()
+    {
+        GameEvents.current.onDisplayGrid -= DisplayGrid;
+    }
+
     public void DisplayGrid(bool b)
     {
         tile_gridCell_sr.enabled = b;
