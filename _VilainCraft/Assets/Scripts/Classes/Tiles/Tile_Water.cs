@@ -10,6 +10,6 @@ public class Tile_Water : Tile
         type = Tile_Type.Water;
         gridPos = _gridPos;
         height = _height;
-        isBuildable = true;
+
     }
 }

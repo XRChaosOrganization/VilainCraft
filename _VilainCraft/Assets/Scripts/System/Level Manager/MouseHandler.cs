@@ -26,6 +26,8 @@ public class MouseHandler : MonoBehaviour
         }
     }
 
+    public Vector3 screenPoint;
+
     [Header("Tile")]    
     public LayerMask tileLayerMask;
     public Tile_MO tile_mo;
@@ -40,7 +42,9 @@ public class MouseHandler : MonoBehaviour
 
     private void Update()
     {
+        MouseToScreenPoint();
         TileMouseOver();
+        
     }
 
 
@@ -63,6 +67,13 @@ public class MouseHandler : MonoBehaviour
             tile_mo = null;
             tileCol = null;
         }
+    }
+
+    void MouseToScreenPoint()
+    {
+        Vector3 pos = Input.mousePosition;
+        pos.z = 10f;
+        screenPoint = Camera.main.ScreenToWorldPoint(pos);
     }
 
     //Ajouter une Methode pour le Mouseover des Buildings

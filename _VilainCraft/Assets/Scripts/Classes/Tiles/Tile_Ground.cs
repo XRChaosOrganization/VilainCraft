@@ -12,7 +12,7 @@ public class Tile_Ground : Tile
         type = Tile_Type.Ground;
         gridPos = _gridPos;
         height = _height;
-        isBuildable = true;
+        
 
         
     }

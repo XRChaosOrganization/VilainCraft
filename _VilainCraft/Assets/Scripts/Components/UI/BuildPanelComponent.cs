@@ -8,7 +8,7 @@ public class BuildPanelComponent : MonoBehaviour
 {
     public TextMeshProUGUI buildingGroupName;
     public List<GameObject> buttons;
-    [HideInInspector] public List<GameObject> buildingList;
+    /*[HideInInspector]*/ public List<GameObject> buildingList;
 
     public void UpdatePanel()
     {
@@ -31,5 +31,10 @@ public class BuildPanelComponent : MonoBehaviour
     public void SetAnimatorState(bool _isOpen)
     {
         GetComponent<Animator>().SetBool("isOpen", _isOpen);
+    }
+
+    public void OnButtonClick(int _id)
+    {
+        BuildingHandler.current.SetBuildingStamp(buildingList[_id]);
     }
 }

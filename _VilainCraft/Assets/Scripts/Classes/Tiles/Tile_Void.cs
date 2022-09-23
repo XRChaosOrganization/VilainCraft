@@ -10,6 +10,6 @@ public class Tile_Void : Tile
         type = Tile_Type.Void;
         gridPos = _gridPos;
         height = _height;
-        isBuildable = false;
+
     }
 }
