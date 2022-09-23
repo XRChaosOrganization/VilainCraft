@@ -14,3 +14,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 0
   sprite: {fileID: 21300000, guid: e501f8ad93e18ae4a883e11a999511e2, type: 3}
+  requiredTiles:
+  - gridPos: {x: 2, y: -2}
+    tileType: 0
+  - gridPos: {x: 2, y: -1}
+    tileType: 0
+  - gridPos: {x: 2, y: 0}
+    tileType: 0
+  - gridPos: {x: 2, y: 1}
+    tileType: 0
+  - gridPos: {x: 2, y: 2}
+    tileType: 0
+  - gridPos: {x: 1, y: -2}
+    tileType: 0
+  - gridPos: {x: 1, y: -1}
+    tileType: 0
+  - gridPos: {x: 1, y: 0}
+    tileType: 0
+  - gridPos: {x: 1, y: 1}
+    tileType: 0
+  - gridPos: {x: 1, y: 2}
+    tileType: 0
+  - gridPos: {x: 0, y: -2}
+    tileType: 0
+  - gridPos: {x: 0, y: -1}
+    tileType: 0
+  - gridPos: {x: 0, y: 0}
+    tileType: 1
+  - gridPos: {x: 0, y: 1}
+    tileType: 0
+  - gridPos: {x: 0, y: 2}
+    tileType: 0
+  - gridPos: {x: -1, y: -2}
+    tileType: 0
+  - gridPos: {x: -1, y: -1}
+    tileType: 0
+  - gridPos: {x: -1, y: 0}
+    tileType: 0
+  - gridPos: {x: -1, y: 1}
+    tileType: 0
+  - gridPos: {x: -1, y: 2}
+    tileType: 0
+  - gridPos: {x: -2, y: -2}
+    tileType: 0
+  - gridPos: {x: -2, y: -1}
+    tileType: 0
+  - gridPos: {x: -2, y: 0}
+    tileType: 0
+  - gridPos: {x: -2, y: 1}
+    tileType: 0
+  - gridPos: {x: -2, y: 2}
+    tileType: 0
