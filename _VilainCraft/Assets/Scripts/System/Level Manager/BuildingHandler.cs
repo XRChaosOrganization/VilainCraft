@@ -13,6 +13,8 @@ public class BuildingHandler : MonoBehaviour
 
     public Transform buildingContainer;
     public GameObject buildingStamp;
+    public Building buildData;
+    List<Pos_Type_Pair> nonVoidTiles;
     Renderer r;
     public Material wireframeGreen;
     public Material wireframeRed;
@@ -33,6 +35,13 @@ public class BuildingHandler : MonoBehaviour
     public void SetBuildingStamp(GameObject _building)
     {
         buildingStamp = _building;
+        buildData = buildingStamp.GetComponent<BuildingBehavior>().building;
+
+        nonVoidTiles = new List<Pos_Type_Pair>();
+        foreach (var tile in buildData.requiredTiles)
+            if (tile.tileType != Tile.Tile_Type.Void)
+                nonVoidTiles.Add(tile);
+
         Transform model = _building.transform.Find("Model");
         buildingPreview = Instantiate(model.gameObject, MouseHandler.current.screenPoint, Quaternion.identity, transform);
         r = buildingPreview.GetComponent<Renderer>();
@@ -55,9 +64,8 @@ public class BuildingHandler : MonoBehaviour
                 return;
             }
 
-            //From the là
 
-            if (MouseHandler.current.tile_mo != null && !GridManager.current.grid[MouseHandler.current.tile_mo.tileComponent.gridPos].building && r.materials[1] != wireframeGreen )
+            if (BuildingCanBePlaced() && r.materials[1] != wireframeGreen )
             {
                 Material[] newMat = r.materials;
                 newMat[1] = wireframeGreen;
@@ -65,8 +73,7 @@ public class BuildingHandler : MonoBehaviour
                 r.materials[1].SetFloat("_isActive", 1f);
                 canBuild = true;
             }
-
-            if ((MouseHandler.current.tile_mo == null || GridManager.current.grid[MouseHandler.current.tile_mo.tileComponent.gridPos].building) && r.materials[1] != wireframeRed)
+            if (!BuildingCanBePlaced() && r.materials[1] != wireframeRed)
             {
                 Material[] newMat = r.materials;
                 newMat[1] = wireframeRed;
@@ -75,23 +82,44 @@ public class BuildingHandler : MonoBehaviour
                 canBuild = false;
             }
 
-            //To the là         il va falloir remanier tout ça, le faire proprement, mettre le check is buildable ailleurs (genre GridUtilities) et avoir des conditions détaillées. Si une seule n'est pas remplie
-            //                  on passe rouge et on peut pas construire, l'idée c'est d'avoir un rapport des differentes raisons pour lesquelles la construction est impossible, et de les display a coté du
-            //                  curseur dans une infobulle.
-            //                  
-            //                  Pour ça, attendre d'avoir un systeme de tile necessaire pour la construction pour chaque tile occupée par le prefab. Doit etre compatible avec la rotation des buildings
-
-
 
             buildingPreview.transform.position = MouseHandler.current.tile_mo != null ? MouseHandler.current.tile_mo.tileAnchor : MouseHandler.current.screenPoint;
+
+
             if (Input.GetMouseButtonDown(0) && canBuild)
             {
                 Instantiate(buildingStamp, MouseHandler.current.tile_mo.tileAnchor, Quaternion.identity, buildingContainer);
-                GridManager.current.grid[MouseHandler.current.tile_mo.tileComponent.gridPos].building = buildingStamp;
-            }
+                foreach (var pair in nonVoidTiles)
+                    GridManager.current.grid[MouseHandler.current.tile_mo.tileComponent.gridPos + pair.gridPos].building = buildingStamp;
 
-            
+            }
         }
+    }
+
+
+    // Add a rotate method, called by new Input system, methods only rotate the vector2 matrix (non void tiles) to match building facing direction. No need to do anymore, rotating the matrix will affect the conditions for placing the building automatically;
+
+
+    bool BuildingCanBePlaced()
+    {
+        if (MouseHandler.current.tile_mo == null)
+            return false;
+
+
+        foreach (var tile in nonVoidTiles)
+        {
+            Vector2 targetTile = MouseHandler.current.tile_mo.tileComponent.gridPos + tile.gridPos;
+            if (!GridManager.current.grid.ContainsKey(targetTile))
+                return false;
+
+            if (GridManager.current.grid[targetTile].height != MouseHandler.current.tile_mo.tile.height)
+                return false;
+
+            if (GridManager.current.grid[targetTile].type != tile.tileType  || GridManager.current.grid[targetTile].building != null)
+                return false;
+        }
+
+        return true;
     }
 
 
