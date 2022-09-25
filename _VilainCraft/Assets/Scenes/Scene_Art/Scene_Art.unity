@@ -18235,6 +18235,7 @@ GameObject:
   m_Component:
   - component: {fileID: 513707949}
   - component: {fileID: 513707950}
+  - component: {fileID: 513707951}
   m_Layer: 0
   m_Name: BuildingHandler
   m_TagString: Untagged
@@ -18274,6 +18275,60 @@ MonoBehaviour:
   buildData: {fileID: 0}
   wireframeGreen: {fileID: 2100000, guid: c5f9f1e25119dce48b7e54f01dc55b8c, type: 2}
   wireframeRed: {fileID: 2100000, guid: 0819a0e31d052c346a17f001769a318a, type: 2}
+--- !u!114 &513707951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513707948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: fb0a9ffe290b7d74b984bdae22fa562a, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0d087489-7e65-4f8a-95fc-10b284de6b0f
+    m_ActionName: CameraControls/Rotate[/Keyboard/q,/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2ded8036-624a-47c9-bd19-4819a5b21787
+    m_ActionName: CameraControls/Zoom[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 513707950}
+        m_TargetAssemblyTypeName: BuildingHandler, Assembly-CSharp
+        m_MethodName: Rotate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ab5ee766-5929-483c-a0a0-03a12b060196
+    m_ActionName: BuildModeControls/Rotate[/Keyboard/r]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: KeyboardAndMouse
+  m_DefaultActionMap: BuildModeControls
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &513819007 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1725498875613512866, guid: 92e72b54a26849642b43b6ac830b5a85, type: 3}
@@ -35296,6 +35351,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 2ded8036-624a-47c9-bd19-4819a5b21787
     m_ActionName: CameraControls/Zoom[/Keyboard/alt,/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ab5ee766-5929-483c-a0a0-03a12b060196
+    m_ActionName: BuildModeControls/Rotate[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: KeyboardAndMouse
   m_DefaultActionMap: CameraControls

@@ -1,5 +1,5 @@
 {
-    "name": "CameraInputs",
+    "name": "PlayerInputs",
     "maps": [
         {
             "name": "CameraControls",
@@ -66,6 +66,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "BuildModeControls",
+            "id": "4b059ae9-dcaf-43c3-88f5-0534e46dcdf4",
+            "actions": [
+                {
+                    "name": "Rotate",
+                    "type": "Button",
+                    "id": "ab5ee766-5929-483c-a0a0-03a12b060196",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "77aa745e-d377-4f96-be1c-5ed3c412c3e8",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

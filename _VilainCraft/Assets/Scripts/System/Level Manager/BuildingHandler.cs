@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BuildingHandler : MonoBehaviour
 {
@@ -88,7 +89,7 @@ public class BuildingHandler : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0) && canBuild)
             {
-                Instantiate(buildingStamp, MouseHandler.current.tile_mo.tileAnchor, Quaternion.identity, buildingContainer);
+                Instantiate(buildingStamp, MouseHandler.current.tile_mo.tileAnchor, buildingPreview.transform.rotation, buildingContainer);
                 foreach (var pair in nonVoidTiles)
                     GridManager.current.grid[MouseHandler.current.tile_mo.tileComponent.gridPos + pair.gridPos].building = buildingStamp;
 
@@ -96,9 +97,21 @@ public class BuildingHandler : MonoBehaviour
         }
     }
 
+    public void Rotate(InputAction.CallbackContext context)
+    {
+        if (isBuildMode && context.started)
+        {
+            List<Pos_Type_Pair> rotatedTiles = new List<Pos_Type_Pair>();
+            foreach (var pair in nonVoidTiles)
+            {
+                Pos_Type_Pair rotatedPair = new Pos_Type_Pair(Vector2.Perpendicular(pair.gridPos), pair.tileType);
+                rotatedTiles.Add(rotatedPair);
+            }
 
-    // Add a rotate method, called by new Input system, methods only rotate the vector2 matrix (non void tiles) to match building facing direction. No need to do anymore, rotating the matrix will affect the conditions for placing the building automatically;
-
+            nonVoidTiles = new List<Pos_Type_Pair>(rotatedTiles);
+            buildingPreview.transform.Rotate(new Vector3(0, -90, 0));
+        }
+    }
 
     bool BuildingCanBePlaced()
     {
