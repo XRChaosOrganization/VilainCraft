@@ -17,14 +17,12 @@ public class MapData
 
 public class LevelConstructor : MonoBehaviour
 {
-    public int tileSize;
+    [HideInInspector] public int tileSize = 4;
     public Tileset tileset;
     public MapData mapData;
     [HideInInspector] public Transform levelContainer;
     [HideInInspector] public Transform tileContainer;
     [HideInInspector] public Transform cameraRig;
-
-    GridManager gm;
 
     [Range(0, 100)] public int variance;
 
@@ -48,19 +46,19 @@ public class LevelConstructor : MonoBehaviour
                 int step = 256 / (tileset.ground.Count + 1);
                 int height = (int) Mathf.Clamp((color.r * 256 / step), 0, tileset.ground.Count) ;
 
-                if (texture.GetPixel(x + (int)waterRect.x, y + (int)waterRect.y).b >= 0.3)
-                    tile = new Tile_Water(gridPos, height);
+                if (texture.GetPixel(x + (int)waterRect.x, y + (int)waterRect.y).b >= 0.5)
+                    tile = new Tile(Tile.Tile_Type.Water,gridPos, height);
                 else if (height == 0)
-                    tile = new Tile_Void(gridPos);
+                    tile = new Tile(Tile.Tile_Type.Void, gridPos);
                 else
-                    tile = new Tile_Ground(gridPos, height);
-                    
+                    tile = new Tile(Tile.Tile_Type.Ground, gridPos, height);
+
                 data.Add(gridPos, tile);
 
             }
         }
-        gm.grid = new Dictionary<Vector2, Tile>(data);
-        gm.SaveGrid();
+        GridManager.current.grid = new Dictionary<Vector2, Tile>(data);
+        GridManager.current.SaveGrid();
         
     }
 
@@ -72,11 +70,11 @@ public class LevelConstructor : MonoBehaviour
             return;
         }
 
-        foreach (KeyValuePair<Vector2,Tile> pair in gm.grid)
+        foreach (KeyValuePair<Vector2,Tile> pair in GridManager.current.grid)
         {
             int height = pair.Value.height;
             Vector2 gridPos = pair.Key;
-            AdjacentTiles adj = GridUtilities.GetAdjacentTiles(gm.grid, gridPos);
+            AdjacentTiles adj = GridUtilities.GetAdjacentTiles(gridPos);
 
             int direction = Random.Range(0, 4);
             float varianceCheck = Random.Range(0f, 1f);
@@ -93,7 +91,7 @@ public class LevelConstructor : MonoBehaviour
 
                 case Tile.Tile_Type.Ground:
                     instance = PrefabUtility.InstantiatePrefab(tileset.ground[height - 1], tileContainer) as GameObject;
-                    Tile_Ground tile = (Tile_Ground)pair.Value;
+                    Tile tile = pair.Value;
                     bool b = false;
 
                     instance.transform.rotation = Quaternion.Euler(0f, 90f * direction, 0f);
@@ -228,6 +226,7 @@ public class LevelConstructor : MonoBehaviour
 
     public void GenerateContainer()
     {
+        //Generates Level Container if missing
         if (!levelContainer)
         {
             GameObject lc = GameObject.Find("LevelContainer");
@@ -241,6 +240,7 @@ public class LevelConstructor : MonoBehaviour
             
         }
 
+        //Generates Tiles Container if missing
         Transform tc = levelContainer.Find("TileContainer");
         if (tc)
         {
@@ -253,6 +253,7 @@ public class LevelConstructor : MonoBehaviour
             tileContainer = go.transform;
         }
 
+        //Generates Cinemachine Vcam if missing
         Transform cr = levelContainer.Find("OrthographicCameraRig");
         if (cr)
         {
@@ -266,6 +267,14 @@ public class LevelConstructor : MonoBehaviour
             cameraRig = camInstance.transform;
             
         }
+
+        //Generates Building Container if missing
+        Transform bc = levelContainer.Find("BuildingContainer");
+        if (!bc)
+        {
+            GameObject go = new GameObject("BuildingContainer");
+            go.transform.SetParent(levelContainer);
+        }
     }
 
     public void GenerateTerrain()
@@ -275,7 +284,7 @@ public class LevelConstructor : MonoBehaviour
         if (tileContainer.childCount > 0)
             ClearTerrain();
 
-        gm = FindObjectOfType<GridManager>();
+        GridManager.current = FindObjectOfType<GridManager>();
 
         ReadMapData();
         PlaceTiles();

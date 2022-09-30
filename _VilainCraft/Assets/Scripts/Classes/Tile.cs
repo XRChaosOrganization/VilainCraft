@@ -16,7 +16,13 @@ public class Tile
     public int height;
     public GameObject building;
     public GameObject associatedGO;
-    
-    
+
+    public Tile(Tile_Type _type, Vector2 _gridPos, int _height = 0)
+    {
+        type = _type;
+        gridPos = _gridPos;
+        height = _height;
+
+    }
 
 }

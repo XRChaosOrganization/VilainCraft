@@ -13,16 +13,18 @@ public class MouseHandler : MonoBehaviour
         public Vector3 worldPos;
         public Vector3 tileAnchor;
         public Tile tile;
-        public SpriteRenderer tile_gridCell_sr;
+        public Vector2 gridPos;
+        public SpriteRenderer gridCell_sr;
         
 
         public Tile_MO(RaycastHit hit)
         {
             tileComponent = hit.collider.GetComponentInParent<TileComponent>();
-            tile_gridCell_sr = tileComponent.tile_gridCell_sr;
+            gridCell_sr = tileComponent.tile_gridCell_sr;
             worldPos = tileComponent.transform.position;
             GridManager.current.grid.TryGetValue(tileComponent.gridPos, out tile);
             tileAnchor = worldPos + Vector3.up * tile.height * 4;
+            gridPos = tileComponent.gridPos;
         }
     }
 
@@ -40,7 +42,7 @@ public class MouseHandler : MonoBehaviour
         current = this;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         MouseToScreenPoint();
         TileMouseOver();

@@ -12,7 +12,7 @@ public class BuildingHandler : MonoBehaviour
     public bool IsBuildMode {get {return isBuildMode;} set { isBuildMode = value; GameEvents.current.DisplayGrid(value || alwaysDisplayGrid);}}
     bool isBuildMode;
 
-    public Transform buildingContainer;
+    Transform buildingContainer;
     public GameObject buildingStamp;
     public Building buildData;
     List<Pos_Type_Pair> nonVoidTiles;
@@ -26,9 +26,13 @@ public class BuildingHandler : MonoBehaviour
     private void Awake()
     {
         current = this;
+        Transform bc = transform.root.Find("BuildingContainer");
+        if (bc)
+            buildingContainer = bc;
+        else Debug.LogError("Cannot find Building Container in Scene");
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         HandleBuildingStamp();
     }
@@ -91,7 +95,7 @@ public class BuildingHandler : MonoBehaviour
             {
                 Instantiate(buildingStamp, MouseHandler.current.tile_mo.tileAnchor, buildingPreview.transform.rotation, buildingContainer);
                 foreach (var pair in nonVoidTiles)
-                    GridManager.current.grid[MouseHandler.current.tile_mo.tileComponent.gridPos + pair.gridPos].building = buildingStamp;
+                    GridManager.current.grid[MouseHandler.current.tile_mo.gridPos + pair.gridPos].building = buildingStamp;
 
             }
         }
@@ -121,7 +125,7 @@ public class BuildingHandler : MonoBehaviour
 
         foreach (var tile in nonVoidTiles)
         {
-            Vector2 targetTile = MouseHandler.current.tile_mo.tileComponent.gridPos + tile.gridPos;
+            Vector2 targetTile = MouseHandler.current.tile_mo.gridPos + tile.gridPos;
             if (!GridManager.current.grid.ContainsKey(targetTile))
                 return false;
 

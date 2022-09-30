@@ -10,11 +10,7 @@ public class BuildingBehavior : MonoBehaviour
     #region Unity Loop
     void Start()
     {
-        foreach (Pos_Type_Pair pair in building.requiredTiles)
-        {
-            if (pair.tileType != Tile.Tile_Type.Void)
-                Debug.Log(pair.tileType);
-        }
+
     }
 
     void Update()

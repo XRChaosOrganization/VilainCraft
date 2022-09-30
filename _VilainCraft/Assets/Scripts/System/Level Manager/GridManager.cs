@@ -3,19 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
-[System.Serializable]
-public class Pos_Tile_Pair
-{
-    public Vector2 gridPos;
-    public Tile tile;
-    public Pos_Tile_Pair(Vector2 _pos, Tile _tile)
-    {
-        gridPos = _pos;
-        tile = _tile;
-    }
-}
-
 public class GridManager : MonoBehaviour
 {
 
