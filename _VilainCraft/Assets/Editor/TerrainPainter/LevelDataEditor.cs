@@ -10,21 +10,7 @@ public class LevelDataEditor : Editor
     LevelData levelData;
     TilemapGroup factoryTilemap;
     TilemapGroup battleTilemap;
-
-    public static int tileSize = 4;
-    [Range(0, 100)] public static int variance;
-
-
-    bool showClearSection;
-    bool showGenerateSection = true;
-
-    static bool genFactory;
-    static bool genBattle;
-    bool clearFactory;
-    bool clearBattle;
-    
-
-
+    enum MapGroup { Factory, Battle, Null = -1 };
     class TilemapGroup
     {
         public Tilemap height;
@@ -44,10 +30,18 @@ public class LevelDataEditor : Editor
             terrain.ClearAllTiles();
             specialTiles.ClearAllTiles();
         }
-
     }
 
-    
+    public static int tileSize = 4;
+    [Range(0, 100)] public static int variance;
+
+    bool showClearSection;
+    bool showGenerateSection = true;
+
+    static bool genFactory;
+    static bool genBattle;
+    bool clearFactory;
+    bool clearBattle;
 
     public override void OnInspectorGUI()
     {
@@ -65,7 +59,6 @@ public class LevelDataEditor : Editor
 
         GUILayout.Space(14);
 
-        EditorGUILayout.BeginVertical();
         showGenerateSection = EditorGUILayout.BeginFoldoutHeaderGroup(showGenerateSection, "Terrain Generation");
         if (showGenerateSection)
         {
@@ -130,6 +123,7 @@ public class LevelDataEditor : Editor
                 }
 
             }
+
             GUI.backgroundColor = Color.cyan;
             EditorGUILayout.EndVertical();
             EditorGUILayout.EndHorizontal();
@@ -191,18 +185,16 @@ public class LevelDataEditor : Editor
 
             }
             GUI.backgroundColor = Color.white;
-            GUILayout.EndVertical();
+            EditorGUILayout.EndHorizontal();
 
 
         }
         EditorGUILayout.EndFoldoutHeaderGroup();
-        EditorGUILayout.EndVertical();
-
-
-
 
     }
 
+
+    #region Methods
     void Init()
     {
         if (levelData == null)
@@ -244,10 +236,7 @@ public class LevelDataEditor : Editor
     {
         List<Tile> tempGrid = new List<Tile>();
         BoundsInt bounds = _tilemap.height.cellBounds;
-        Debug.Log(bounds.xMax);
         
-        
-
         for (int i = bounds.xMin; i < bounds.xMax; i++)
         {
             for (int j = bounds.yMin; j < bounds.yMax; j++)
@@ -262,10 +251,8 @@ public class LevelDataEditor : Editor
                     tempGrid.Add(new Tile(new Vector2Int(i, j), GetType(st), GetHeight(sh)));
                 }
                 else tempGrid.Add(new Tile(new Vector2Int(i, j), Tile.Tile_Type.Void));
-       
             }
         }
-
         return tempGrid;
     }
 
@@ -289,8 +276,6 @@ public class LevelDataEditor : Editor
             default:
                 height = 0;
                 break;
-
-                
         }
         return height;
     }
@@ -310,7 +295,6 @@ public class LevelDataEditor : Editor
                 t = Tile.Tile_Type.Void;
                 break;
         }
-
         return t;
     }
 
@@ -330,7 +314,6 @@ public class LevelDataEditor : Editor
                 t = null;
                 break;
         }
-
         return t;
     }
 
@@ -353,19 +336,16 @@ public class LevelDataEditor : Editor
                 v = Vector3.zero;
                 break;
         }
-
         return v;
     }
 
     void ClearTerrain(Transform _container)
     {
-
         for (int i = _container.childCount - 1; i >= 0; --i)
         {
             if (Application.isEditor)
                 DestroyImmediate(_container.GetChild(i).gameObject);
             else Destroy(_container.GetChild(i).gameObject);
-
         }
     }
 
@@ -394,7 +374,6 @@ public class LevelDataEditor : Editor
 
         foreach (Tile _tile in _grid)
         {
-
             AdjacentTiles adj = GridUtilities.GetAdjacentTiles(tempGrid,_tile.gridPos);
 
             GameObject instance = null;
@@ -404,12 +383,10 @@ public class LevelDataEditor : Editor
             float varianceCheck = Random.Range(0f, 1f);
             int variantIndex = Random.Range(0, 3);
 
-
             switch (_tile.type)
             {
                 case Tile.Tile_Type.Void:
                     break;
-
 
 
                 case Tile.Tile_Type.Grass:
@@ -417,7 +394,6 @@ public class LevelDataEditor : Editor
                     asset = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Tiles/Ground/Grass_h" + _tile.height.ToString() + ".prefab", typeof (GameObject));
                     instance = PrefabUtility.InstantiatePrefab(asset, container) as GameObject;
 
-                    
                     bool b = false;
 
                     instance.transform.rotation = Quaternion.Euler(0f, 90f * direction, 0f);
@@ -453,8 +429,6 @@ public class LevelDataEditor : Editor
                                 Transform _t = null;
                                 List<GameObject> w_tilesetList = null;
                                 int i = GridUtilities.GetDirectionIndex(pointer);
-
-
 
                                 // Directions are numbered clockwise from 0 to 7 starting with up = 0
                                 // i is Odd => Tiles in Diagonal (UpRight = 1, DownRight = 3, DownLeft = 5, UpLeft = 7)
@@ -512,10 +486,7 @@ public class LevelDataEditor : Editor
                                         w_tilesetList.Add((GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/TileParts/Water/Waterfall_Straight_Bottom.prefab", typeof(GameObject)));
                                         w_tilesetList.Add((GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/TileParts/Water/Waterfall_Straight_Body.prefab", typeof(GameObject)));
                                     }
-
-
                                 }
-
 
                                 if (_t != null && w_tilesetList != null)
                                 {
@@ -543,22 +514,14 @@ public class LevelDataEditor : Editor
                 instance.transform.position = /*origin +*/ wordlPos;
                 instance.GetComponent<TileComponent>().gridPos = _tile.gridPos;
                 _tile.associatedGO = instance;
-
             }
         }
-
-
 
         if(_mapGroup == MapGroup.Factory)
         {
             levelData.grid = tempGrid;
             levelData.SaveGrid();
         }
-
-        //instanciate 3D tiles
-
-
-
     }
 
     void TerrainToggle(MapGroup _mapGroup = MapGroup.Null ,bool forceActive = false)
@@ -581,16 +544,6 @@ public class LevelDataEditor : Editor
         }
     }
 
-    
-
-    enum MapGroup {Factory, Battle, Null = -1};
-
-
-
-
-
+    #endregion
 
 }
-
-
-
