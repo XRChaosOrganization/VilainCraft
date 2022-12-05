@@ -9,7 +9,7 @@ using UnityEngine;
 [System.Serializable]
 public class Tile
 {
-    public enum Tile_Type { Void, Ground, Water };
+    public enum Tile_Type { Void, Grass, Water };
 
     public Tile_Type type;
     public Vector2 gridPos;
@@ -17,7 +17,7 @@ public class Tile
     public GameObject building;
     public GameObject associatedGO;
 
-    public Tile(Tile_Type _type, Vector2 _gridPos, int _height = 0)
+    public Tile(Vector2 _gridPos, Tile_Type _type,  int _height = 0)
     {
         type = _type;
         gridPos = _gridPos;

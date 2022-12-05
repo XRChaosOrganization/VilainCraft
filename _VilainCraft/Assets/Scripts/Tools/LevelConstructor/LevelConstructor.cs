@@ -47,11 +47,11 @@ public class LevelConstructor : MonoBehaviour
                 int height = (int) Mathf.Clamp((color.r * 256 / step), 0, tileset.ground.Count) ;
 
                 if (texture.GetPixel(x + (int)waterRect.x, y + (int)waterRect.y).b >= 0.5)
-                    tile = new Tile(Tile.Tile_Type.Water,gridPos, height);
+                    tile = new Tile(gridPos, Tile.Tile_Type.Water, height);
                 else if (height == 0)
-                    tile = new Tile(Tile.Tile_Type.Void, gridPos);
+                    tile = new Tile(gridPos, Tile.Tile_Type.Void);
                 else
-                    tile = new Tile(Tile.Tile_Type.Ground, gridPos, height);
+                    tile = new Tile(gridPos, Tile.Tile_Type.Grass, height);
 
                 data.Add(gridPos, tile);
 
@@ -74,7 +74,7 @@ public class LevelConstructor : MonoBehaviour
         {
             int height = pair.Value.height;
             Vector2 gridPos = pair.Key;
-            AdjacentTiles adj = GridUtilities.GetAdjacentTiles(gridPos);
+            AdjacentTiles adj = GridUtilities.GetAdjacentTiles(GridManager.current.grid, gridPos);
 
             int direction = Random.Range(0, 4);
             float varianceCheck = Random.Range(0f, 1f);
@@ -89,7 +89,7 @@ public class LevelConstructor : MonoBehaviour
 
 
 
-                case Tile.Tile_Type.Ground:
+                case Tile.Tile_Type.Grass:
                     instance = PrefabUtility.InstantiatePrefab(tileset.ground[height - 1], tileContainer) as GameObject;
                     Tile tile = pair.Value;
                     bool b = false;
@@ -133,11 +133,11 @@ public class LevelConstructor : MonoBehaviour
                                 {
                                     // Conditions to detect Out Corner
                                     if ((GridUtilities.GetAdjacentFromIndex(adj, i - 1).height < pair.Value.height ||
-                                        (GridUtilities.GetAdjacentFromIndex(adj, i - 1).type == Tile.Tile_Type.Ground &&
+                                        (GridUtilities.GetAdjacentFromIndex(adj, i - 1).type == Tile.Tile_Type.Grass &&
                                         GridUtilities.GetAdjacentFromIndex(adj, i - 1).height == pair.Value.height))
                                         &&
                                         (GridUtilities.GetAdjacentFromIndex(adj, i == 7 ? 0 : i + 1).height < pair.Value.height ||
-                                        (GridUtilities.GetAdjacentFromIndex(adj, i == 7 ? 0 : i + 1).type == Tile.Tile_Type.Ground &&
+                                        (GridUtilities.GetAdjacentFromIndex(adj, i == 7 ? 0 : i + 1).type == Tile.Tile_Type.Grass &&
                                         GridUtilities.GetAdjacentFromIndex(adj, i == 7 ? 0 : i + 1).height == pair.Value.height)))
                                     {
                                         

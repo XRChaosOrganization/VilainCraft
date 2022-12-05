@@ -20,7 +20,7 @@ public class BuildingEditor : Editor
             case Tile.Tile_Type.Void:
                 c = Color.white;
                 break;
-            case Tile.Tile_Type.Ground:
+            case Tile.Tile_Type.Grass:
                 c = Color.green;
                 break;
             case Tile.Tile_Type.Water:

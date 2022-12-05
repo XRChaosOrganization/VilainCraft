@@ -74,9 +74,9 @@ public class AdjacentTiles : IEnumerable
 
 public class GridUtilities
 {
-    public static AdjacentTiles GetAdjacentTiles(Vector2 _refPos)
+    public static AdjacentTiles GetAdjacentTiles(Dictionary<Vector2, Tile> _grid, Vector2 _refPos)
     {
-        Dictionary < Vector2, Tile > _grid = GridManager.current.grid;
+        
         AdjacentTiles output = new AdjacentTiles();
         output.up = _grid.ContainsKey(_refPos + Vector2.up) ? _grid[_refPos + Vector2.up] : null;
         output.upRight = _grid.ContainsKey(_refPos + Vector2.up + Vector2.right) ? _grid[_refPos + Vector2.up + Vector2.right] : null;
