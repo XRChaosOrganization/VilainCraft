@@ -454,7 +454,9 @@ public class LevelDataEditor : Editor
                                     }
                                     // Conditions to detect In Corner
                                     else if (GridUtilities.GetAdjacentFromIndex(adj, i - 1).height == _tile.height &&
-                                        GridUtilities.GetAdjacentFromIndex(adj, i == 7 ? 0 : i + 1).height == _tile.height)
+                                        GridUtilities.GetAdjacentFromIndex(adj, i - 1).type == Tile.Tile_Type.Water &&
+                                        GridUtilities.GetAdjacentFromIndex(adj, i == 7 ? 0 : i + 1).height == _tile.height &&
+                                        GridUtilities.GetAdjacentFromIndex(adj, i == 7 ? 0 : i + 1).type == Tile.Tile_Type.Water)
                                     {
                                         _t = edges.GetChild(i);
                                         w_tilesetList = new List<GameObject>();
