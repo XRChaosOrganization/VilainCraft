@@ -12,6 +12,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Waterfall
+    second: {fileID: 2100000, guid: 62eb5c4e6a1832c42b21cca6a0ded03e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: m_Dirt
     second: {fileID: 2100000, guid: d43bce4d3bde6424b90a340dace459d5, type: 2}
   - first:

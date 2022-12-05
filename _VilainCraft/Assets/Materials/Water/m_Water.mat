@@ -7,14 +7,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water_mat
+  m_Name: m_Water
   m_Shader: {fileID: -6465566751694194690, guid: c8e593327a4e75545b0756fc39932624, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -35,13 +35,13 @@ Material:
     m_Ints: []
     m_Floats:
     - _Alpha: 1
-    - _Depth: 1.85
+    - _Depth: 1.35
     - _Distance: -38.5
     - _FarPlaneScale: 14.12
-    - _FoamAmount: 2.99
-    - _FoamCutoff: 2.96
-    - _FoamScale: 1.44
-    - _FoamSpeed: 1.11
+    - _FoamAmount: 2.69
+    - _FoamCutoff: 1.68
+    - _FoamScale: 2.22
+    - _FoamSpeed: 0.81
     - _Intensity: 2.18
     - _Metallic: 0
     - _NormalPower: 0
@@ -51,12 +51,23 @@ Material:
     - _RipplesSpeed: 2
     - _Smoothness: 0
     - _Tiling: 0.5
+    - _WaterfallFoamAmount: 1
+    - _WaterfallFoamCutoff: 0.76
+    - _WaterfallFoamScale: 2
+    - _WaterfallFoamSpeed: -1
+    - _WaterfallScale: 1
+    - _WaterfallSpeed: 1
     m_Colors:
     - _BaseColor: {r: 0.0495283, g: 0.1367164, b: 0.5, a: 1}
     - _DeepColor: {r: 0, g: 0.04231142, b: 0.1682695, a: 0.9215686}
     - _FoamColor: {r: 0.764151, g: 0.764151, b: 0.764151, a: 1}
+    - _NormalEdge: {r: 0.06, g: 0.55, b: 0, a: 0}
     - _RipplesColor: {r: 0.13333334, g: 0.5411765, b: 0.7490196, a: 1}
     - _ShallowColor: {r: 0.05126947, g: 0.1912017, b: 0.4341537, a: 0.4823529}
+    - _SmoothstepEdge: {r: 0.3, g: 0.7, b: 0, a: 0}
+    - _Smoothstep_Edge: {r: 0.4, g: 0.9, b: 0, a: 0}
+    - _WaterfallFoamTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _WaterfallTiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6806000575016488895
 MonoBehaviour:

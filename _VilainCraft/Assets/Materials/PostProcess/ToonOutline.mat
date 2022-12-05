@@ -42,10 +42,10 @@ Material:
     - _DecalMeshBiasType: 0
     - _DecalMeshDepthBias: 0
     - _DecalMeshViewBias: 0
-    - _Distance: 400
+    - _Distance: 10
     - _DrawOrder: 0
     - _DstBlend: 10
-    - _Outline_Pixel: 1
+    - _Outline_Pixel: 0.7
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SrcBlend: 5
