@@ -7253,7 +7253,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "1e90e8c7752d4be99adbba3e86e37216",
     "m_Id": 0,
-    "m_DisplayName": "WaterfallFoamSpeed",
+    "m_DisplayName": "WaterfallSpeed",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -7349,10 +7349,10 @@
     "m_Guid": {
         "m_GuidSerialized": "0eab9e94-87ec-4339-bd08-2bbc8e116693"
     },
-    "m_Name": "WaterfallFoamCutoff",
+    "m_Name": "WaterfallCutoff",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "WaterfallFoamCutoff",
-    "m_DefaultReferenceName": "_WaterfallFoamCutoff",
+    "m_RefNameGeneratedByDisplayName": "WaterfallCutoff",
+    "m_DefaultReferenceName": "_WaterfallCutoff",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -7362,10 +7362,10 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": 1.0,
-    "m_FloatType": 0,
+    "m_FloatType": 1,
     "m_RangeValues": {
         "x": 0.0,
-        "y": 1.0
+        "y": 5.0
     }
 }
 
@@ -7958,10 +7958,10 @@
     "m_Guid": {
         "m_GuidSerialized": "81135b58-908e-4dd1-85a8-d5ab414092b0"
     },
-    "m_Name": "WaterfallFoamSpeed",
+    "m_Name": "WaterfallSpeed",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "WaterfallFoamSpeed",
-    "m_DefaultReferenceName": "_WaterfallFoamSpeed",
+    "m_RefNameGeneratedByDisplayName": "WaterfallSpeed",
+    "m_DefaultReferenceName": "_WaterfallSpeed",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -7971,10 +7971,10 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": 1.0,
-    "m_FloatType": 0,
+    "m_FloatType": 1,
     "m_RangeValues": {
         "x": 0.0,
-        "y": 1.0
+        "y": 2.0
     }
 }
 
@@ -9134,7 +9134,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
     "m_ObjectId": "33f5a40194b445c08e0ed993e741a5c0",
     "m_Id": 0,
-    "m_DisplayName": "WaterfallFoamTiling",
+    "m_DisplayName": "WaterfallTiling",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -10407,7 +10407,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
     "m_ObjectId": "43b3ec93de99479289bfa415d311a54a",
     "m_Id": 0,
-    "m_DisplayName": "WaterfallFoamTiling",
+    "m_DisplayName": "WaterfallTiling",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -10489,10 +10489,10 @@
     "m_Guid": {
         "m_GuidSerialized": "9c77db26-7866-478a-8166-82378dc04048"
     },
-    "m_Name": "RidgeSmoothstepEdge",
+    "m_Name": "RidgeSmoothstep",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "RidgeSmoothstepEdge",
-    "m_DefaultReferenceName": "_RidgeSmoothstepEdge",
+    "m_RefNameGeneratedByDisplayName": "RidgeSmoothstep",
+    "m_DefaultReferenceName": "_RidgeSmoothstep",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -11428,7 +11428,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "5126093a4d96402ab0abe27b261499c3",
     "m_Id": 0,
-    "m_DisplayName": "WaterfallFoamCutoff",
+    "m_DisplayName": "WaterfallCutoff",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -12329,7 +12329,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "5b21c6128e474fb69b354c706c975021",
     "m_Id": 0,
-    "m_DisplayName": "WaterfallFoamCutoff",
+    "m_DisplayName": "WaterfallCutoff",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -12818,7 +12818,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "6134036e15e7463f88db75533ab04053",
     "m_Id": 0,
-    "m_DisplayName": "WaterfallFoamCutoff",
+    "m_DisplayName": "WaterfallCutoff",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -13166,7 +13166,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
     "m_ObjectId": "6488d5dc4ff64d42986b50884348297d",
     "m_Id": 0,
-    "m_DisplayName": "WaterfallFoamTiling",
+    "m_DisplayName": "WaterfallTiling",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -14247,7 +14247,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "6e9885483d514bc7bccb8ebb5e8368ad",
     "m_Id": 0,
-    "m_DisplayName": "WaterfallFoamCutoff",
+    "m_DisplayName": "WaterfallCutoff",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -15884,10 +15884,10 @@
     "m_Guid": {
         "m_GuidSerialized": "7c737d72-1983-4146-af03-248c5fb424b2"
     },
-    "m_Name": "WaterfallFoamTiling",
+    "m_Name": "WaterfallTiling",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "WaterfallFoamTiling",
-    "m_DefaultReferenceName": "_WaterfallFoamTiling",
+    "m_RefNameGeneratedByDisplayName": "WaterfallTiling",
+    "m_DefaultReferenceName": "_WaterfallTiling",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -17371,7 +17371,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
     "m_ObjectId": "8e647992a33041d98edb92f481a909f2",
     "m_Id": 0,
-    "m_DisplayName": "WaterfallFoamTiling",
+    "m_DisplayName": "WaterfallTiling",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -17847,13 +17847,13 @@
             "m_Id": "d4ce1061e2734c15b4bd0823eadd5dbc"
         },
         {
-            "m_Id": "1f17a9593ed84f32bf8513a184ddc730"
-        },
-        {
             "m_Id": "7dc091c3abce423ba3c70cee1e9267a9"
         },
         {
             "m_Id": "dad04ba49c1147c09082dc540724ca5c"
+        },
+        {
+            "m_Id": "1f17a9593ed84f32bf8513a184ddc730"
         },
         {
             "m_Id": "26ac8260ae994762ad46cbab8b86bbcc"
@@ -18849,7 +18849,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
     "m_ObjectId": "9cd32eb51354499686db666368564d03",
     "m_Id": 0,
-    "m_DisplayName": "RidgeSmoothstepEdge",
+    "m_DisplayName": "RidgeSmoothstep",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -19796,7 +19796,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
     "m_ObjectId": "ac430078e6be4641926d521b1713ccb9",
     "m_Id": 0,
-    "m_DisplayName": "RidgeSmoothstepEdge",
+    "m_DisplayName": "RidgeSmoothstep",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -19867,7 +19867,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "ad8103d3ec9d48a3910dfa0ef7867bc6",
     "m_Id": 0,
-    "m_DisplayName": "WaterfallFoamSpeed",
+    "m_DisplayName": "WaterfallSpeed",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -20892,7 +20892,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "b79af70f3c7e47ad91c0cb2bbb298ba0",
     "m_Id": 0,
-    "m_DisplayName": "WaterfallFoamSpeed",
+    "m_DisplayName": "WaterfallSpeed",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -22651,7 +22651,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "cb93b285a4cb41f3bd21fb45abf4c183",
     "m_Id": 0,
-    "m_DisplayName": "WaterfallFoamSpeed",
+    "m_DisplayName": "WaterfallSpeed",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -24401,7 +24401,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "dbe9e7d0cd094ec08653a9126b6a96e5",
     "m_Id": 0,
-    "m_DisplayName": "WaterfallFoamSpeed",
+    "m_DisplayName": "WaterfallSpeed",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -26827,7 +26827,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "f2e7b155cc8c44a7ae65a81f15a2c443",
     "m_Id": 0,
-    "m_DisplayName": "WaterfallFoamSpeed",
+    "m_DisplayName": "WaterfallSpeed",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",

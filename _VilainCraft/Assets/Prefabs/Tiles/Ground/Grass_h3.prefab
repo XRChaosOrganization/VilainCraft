@@ -42,6 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 235550160836563902}
   - component: {fileID: 7027009167635032855}
+  - component: {fileID: 1549121623085263383}
   m_Layer: 6
   m_Name: Grass_h3
   m_TagString: Untagged
@@ -63,6 +64,7 @@ Transform:
   m_Children:
   - {fileID: 2946591683466063303}
   - {fileID: 4730042657387189639}
+  - {fileID: 5099433912019579481}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -80,6 +82,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridPos: {x: 0, y: 0}
   tile_gridCell_sr: {fileID: 0}
+--- !u!114 &1549121623085263383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347675040785907385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbc282a3ce8894647bb3d7c8aea4761e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasBlocker: 0
+  tileContent: {fileID: 5099433912019579481}
 --- !u!1 &2760926814029858928
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,6 +180,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &5835436959087577744
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5099433912019579481}
+  m_Layer: 6
+  m_Name: TileContent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5099433912019579481
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5835436959087577744}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 12, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 235550160836563902}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5520310763951914721
 PrefabInstance:
   m_ObjectHideFlags: 0

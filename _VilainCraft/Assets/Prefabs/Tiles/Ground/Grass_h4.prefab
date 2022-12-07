@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4430838791872668172}
   - component: {fileID: 4236685738787451804}
+  - component: {fileID: 788612279632868152}
   m_Layer: 6
   m_Name: Grass_h4
   m_TagString: Untagged
@@ -31,6 +32,7 @@ Transform:
   m_Children:
   - {fileID: 1451733294945079351}
   - {fileID: 352548650950450320}
+  - {fileID: 8791669393634338600}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -48,6 +50,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridPos: {x: 0, y: 0}
   tile_gridCell_sr: {fileID: 0}
+--- !u!114 &788612279632868152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065174433496659681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbc282a3ce8894647bb3d7c8aea4761e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasBlocker: 0
+  tileContent: {fileID: 8791669393634338600}
 --- !u!1 &1911749578089712083
 GameObject:
   m_ObjectHideFlags: 0
@@ -79,6 +95,37 @@ Transform:
   - {fileID: 684329108935387378}
   m_Father: {fileID: 4430838791872668172}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2463161590644430998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8791669393634338600}
+  m_Layer: 6
+  m_Name: TileContent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8791669393634338600
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2463161590644430998}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 16, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4430838791872668172}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4214003085989529674
 GameObject:

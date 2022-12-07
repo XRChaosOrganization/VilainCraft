@@ -45,6 +45,7 @@ Material:
     - _Intensity: 2.18
     - _Metallic: 0
     - _NormalPower: 0
+    - _Outline: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _RipplesScale: 0.21
@@ -57,11 +58,13 @@ Material:
     - _WaterfallFoamSpeed: -1
     - _WaterfallScale: 1
     - _WaterfallSpeed: 1
+    - _distance: -7.01
     m_Colors:
     - _BaseColor: {r: 0.0495283, g: 0.1367164, b: 0.5, a: 1}
     - _DeepColor: {r: 0, g: 0.04231142, b: 0.1682695, a: 0.9215686}
     - _FoamColor: {r: 0.764151, g: 0.764151, b: 0.764151, a: 1}
     - _NormalEdge: {r: 0.06, g: 0.55, b: 0, a: 0}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 0}
     - _RipplesColor: {r: 0.13333334, g: 0.5411765, b: 0.7490196, a: 1}
     - _ShallowColor: {r: 0.05126947, g: 0.1912017, b: 0.4341537, a: 0.4823529}
     - _SmoothstepEdge: {r: 0.3, g: 0.7, b: 0, a: 0}

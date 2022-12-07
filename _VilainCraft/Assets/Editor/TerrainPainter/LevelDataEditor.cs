@@ -247,8 +247,15 @@ public class LevelDataEditor : Editor
                 {
                     string sh = factoryTilemap.height.GetTile(p).name;
                     string st = factoryTilemap.terrain.GetTile(p).name;
+                    string sb = new string("");
 
-                    tempGrid.Add(new Tile(new Vector2Int(i, j), GetType(st), GetHeight(sh)));
+                    if (factoryTilemap.specialTiles.GetTile(p))
+                        sb = factoryTilemap.specialTiles.GetTile(p).name;
+
+                    //Tile t = new Tile(new Vector2Int(i, j), GetType(st), GetHeight(sh), sb == "TileBlocker");
+                    //t.
+
+                    tempGrid.Add(new Tile(new Vector2Int(i, j), GetType(st), GetHeight(sh), sb == "TileBlocker"));
                 }
                 else tempGrid.Add(new Tile(new Vector2Int(i, j), Tile.Tile_Type.Void));
             }
@@ -383,6 +390,8 @@ public class LevelDataEditor : Editor
             float varianceCheck = Random.Range(0f, 1f);
             int variantIndex = Random.Range(0, 3);
 
+            bool waterfallBlock = false;
+
             switch (_tile.type)
             {
                 case Tile.Tile_Type.Void:
@@ -431,11 +440,11 @@ public class LevelDataEditor : Editor
                                 int i = GridUtilities.GetDirectionIndex(pointer);
 
                                 // Directions are numbered clockwise from 0 to 7 starting with up = 0
-                                // i is Odd => Tiles in Diagonal (UpRight = 1, DownRight = 3, DownLeft = 5, UpLeft = 7)
+                                // If i is Odd => Tiles in Diagonal (UpRight = 1, DownRight = 3, DownLeft = 5, UpLeft = 7)
 
                                 if (i % 2 != 0)
                                 {
-                                    // Conditions to detect Out Corner :
+                                    // If Conditions to detect Out Corner :
                                     // 
                                     if ((GridUtilities.GetAdjacentFromIndex(adj, i - 1).height < _tile.height ||
                                         (GridUtilities.GetAdjacentFromIndex(adj, i - 1).type == Tile.Tile_Type.Grass &&
@@ -445,19 +454,20 @@ public class LevelDataEditor : Editor
                                         (GridUtilities.GetAdjacentFromIndex(adj, i == 7 ? 0 : i + 1).type == Tile.Tile_Type.Grass &&
                                         GridUtilities.GetAdjacentFromIndex(adj, i == 7 ? 0 : i + 1).height == _tile.height)))
                                     {
-
+                                        //Do
                                         _t = edges.GetChild(i);
                                         w_tilesetList = new List<GameObject>();
                                         w_tilesetList.Add((GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/TileParts/Water/Waterfall_CornerOut_Top.prefab", typeof(GameObject)));
                                         w_tilesetList.Add((GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/TileParts/Water/Waterfall_CornerOut_Bottom.prefab", typeof(GameObject)));
                                         w_tilesetList.Add((GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/TileParts/Water/Waterfall_CornerOut_Body.prefab", typeof(GameObject)));
                                     }
-                                    // Conditions to detect In Corner
+                                    // If Conditions to detect In Corner
                                     else if (GridUtilities.GetAdjacentFromIndex(adj, i - 1).height == _tile.height &&
                                         GridUtilities.GetAdjacentFromIndex(adj, i - 1).type == Tile.Tile_Type.Water &&
                                         GridUtilities.GetAdjacentFromIndex(adj, i == 7 ? 0 : i + 1).height == _tile.height &&
                                         GridUtilities.GetAdjacentFromIndex(adj, i == 7 ? 0 : i + 1).type == Tile.Tile_Type.Water)
                                     {
+                                        //Do
                                         _t = edges.GetChild(i);
                                         w_tilesetList = new List<GameObject>();
                                         w_tilesetList.Add((GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/TileParts/Water/Waterfall_CornerIn_Top.prefab", typeof(GameObject)));
@@ -466,14 +476,18 @@ public class LevelDataEditor : Editor
                                     }
 
                                 }
-                                else // i is Even => Tiles in Cardinal (Up = 0, Right = 2, Down = 4, Left = 6)
+                                else // If i is Even => Tiles in Cardinal (Up = 0, Right = 2, Down = 4, Left = 6)
                                 {
                                     if (GridUtilities.GetAdjacentFromIndex(adj, i == 0 ? 7 : i - 1).height >= _tile.height && 
                                         GridUtilities.GetAdjacentFromIndex(adj, i == 0 ? 7 : i - 1).type == Tile.Tile_Type.Water 
                                         ||
                                         GridUtilities.GetAdjacentFromIndex(adj, i == 7 ? 0 : i + 1).height == _tile.height &&
                                         GridUtilities.GetAdjacentFromIndex(adj, i == 7 ? 0 : i + 1).type == Tile.Tile_Type.Water)
+                                    {
+                                        
                                         _t = null;
+                                    }
+                                        
 
                                     else if (GridUtilities.GetAdjacentFromIndex(adj, i).height >= _tile.height)
                                     {
@@ -492,6 +506,10 @@ public class LevelDataEditor : Editor
 
                                 if (_t != null && w_tilesetList != null)
                                 {
+                                    //GridUtilities.GetAdjacentFromIndex(adj, i).isBlocked = true;
+                                    //tempGrid[GridUtilities.GetAdjacentFromIndex(adj, i).gridPos].isBlocked = true;
+                                    
+                                    waterfallBlock = true;
                                     int h = _tile.height - tAdj.height;
                                     for (int j = 0; j < h + 1; j++)
                                     {
@@ -513,9 +531,14 @@ public class LevelDataEditor : Editor
             if (instance != null)
             {
                 Vector3 wordlPos = new Vector3((_tile.gridPos.x + 0.5f) * tileSize, 0, (_tile.gridPos.y +0.5f) * tileSize);
-                instance.transform.position = /*origin +*/ wordlPos;
+                instance.transform.position = wordlPos;
+
                 instance.GetComponent<TileComponent>().gridPos = _tile.gridPos;
+                instance.GetComponent<TileGizmo>().hasBlocker = _tile.isBlocked && !waterfallBlock;
+
                 _tile.associatedGO = instance;
+                if (_tile.type == Tile.Tile_Type.Water && waterfallBlock)
+                    _tile.isBlocked = true;
             }
         }
 

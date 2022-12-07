@@ -8,6 +8,8 @@ public class TileComponent : MonoBehaviour /*, IPointerEnterHandler , IPointerEx
     public Vector2 gridPos;
     [HideInInspector]public SpriteRenderer tile_gridCell_sr;
 
+
+
     private void Awake()
     {
         tile_gridCell_sr = GetComponentInChildren<SpriteRenderer>();
@@ -26,5 +28,6 @@ public class TileComponent : MonoBehaviour /*, IPointerEnterHandler , IPointerEx
     {
         tile_gridCell_sr.enabled = b;
     }
+
 
 }
