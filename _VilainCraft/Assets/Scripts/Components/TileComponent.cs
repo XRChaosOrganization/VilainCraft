@@ -30,4 +30,8 @@ public class TileComponent : MonoBehaviour /*, IPointerEnterHandler , IPointerEx
     }
 
 
+
+
+
+
 }

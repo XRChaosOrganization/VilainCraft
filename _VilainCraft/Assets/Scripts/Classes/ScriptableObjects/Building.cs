@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "", menuName = "Building", order = 1)]
+[CreateAssetMenu(fileName = "", menuName = "Game Data/Building", order = 1)]
 public class Building : ScriptableObject
 {
     public int cost;

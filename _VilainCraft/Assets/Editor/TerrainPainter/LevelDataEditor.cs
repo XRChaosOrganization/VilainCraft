@@ -81,7 +81,6 @@ public class LevelDataEditor : Editor
 
                     if (genFactory)
                     {
-                        //Debug.Log("origin = " + factoryTilemap.height.origin);
                         List<Tile> grid = GenerateGrid(factoryTilemap);
                         levelData.serializableGrid = grid;
                         levelData.LoadGrid();
@@ -247,15 +246,15 @@ public class LevelDataEditor : Editor
                 {
                     string sh = factoryTilemap.height.GetTile(p).name;
                     string st = factoryTilemap.terrain.GetTile(p).name;
-                    string sb = new string("");
+                    string sx = new string("");
 
                     if (factoryTilemap.specialTiles.GetTile(p))
-                        sb = factoryTilemap.specialTiles.GetTile(p).name;
+                        sx = factoryTilemap.specialTiles.GetTile(p).name;
 
-                    //Tile t = new Tile(new Vector2Int(i, j), GetType(st), GetHeight(sh), sb == "TileBlocker");
-                    //t.
+                    Tile t = new Tile(new Vector2Int(i, j), GetType(st), GetHeight(sh), sx == "TileBlocker");
+                    t.node = GetNode(sx);
 
-                    tempGrid.Add(new Tile(new Vector2Int(i, j), GetType(st), GetHeight(sh), sb == "TileBlocker"));
+                    tempGrid.Add(t);
                 }
                 else tempGrid.Add(new Tile(new Vector2Int(i, j), Tile.Tile_Type.Void));
             }
@@ -265,85 +264,75 @@ public class LevelDataEditor : Editor
 
     int GetHeight(string _tileName)
     {
-        int height;
         switch (_tileName)
         {
             case "Height1":
-                height = 1;
-                break;
+                return 1;
             case "Height2":
-                height = 2;
-                break;
+                return 2;
             case "Height3":
-                height = 3;
-                break;
+                return 3;
             case "Height4":
-                height = 4;
-                break;
+                return 4;
             default:
-                height = 0;
-                break;
+                return 0;
         }
-        return height;
     }
 
     Tile.Tile_Type GetType(string _tileName)
     {
-        Tile.Tile_Type t;
         switch (_tileName)
         {
             case "Grass":
-                t = Tile.Tile_Type.Grass;
-                break;
+                return Tile.Tile_Type.Grass;
             case "Water":
-                t = Tile.Tile_Type.Water;
-                break;
+                return Tile.Tile_Type.Water;
             default:
-                t = Tile.Tile_Type.Void;
-                break;
+                return Tile.Tile_Type.Void;
         }
-        return t;
+    }
+
+    RawRessource GetNode(string _tileName)
+    {
+        string path = "Assets/Data/Items/Raw/";
+        string extension = ".asset";
+        switch (_tileName)
+        {
+            case "BlankNode":
+                return (RawRessource)AssetDatabase.LoadAssetAtPath(path + "BlankRessource" + extension, typeof(RawRessource));
+            default:
+                return null;
+        }
     }
 
     Transform GetContainer(MapGroup _mapGroup)
     {
-        Transform t;
-
         switch (_mapGroup)
         {
             case MapGroup.Factory:
-                t = levelData.transform.Find("FactoryMapTerrain");
-                break;
+                return levelData.transform.Find("FactoryMapTerrain");
             case MapGroup.Battle:
-                t = levelData.transform.Find("BattleMapTerrain");
-                break;
+                return levelData.transform.Find("BattleMapTerrain");
             default:
-                t = null;
-                break;
+                return null;
         }
-        return t;
     }
 
     Vector3 GetOrigin(MapGroup _mapGroup)
     {
-        Vector3 v;
         Vector3 temp;
 
         switch (_mapGroup)
         {
             case MapGroup.Factory:
                 temp = factoryTilemap.height.origin;
-                v = new Vector3(temp.x, temp.z, temp.y);
-                break;
+                return new Vector3(temp.x, temp.z, temp.y);
             case MapGroup.Battle:
                 temp = battleTilemap.height.origin;
-                v = new Vector3(temp.x, temp.z, temp.y);
-                break;
+                return new Vector3(temp.x, temp.z, temp.y);
             default:
-                v = Vector3.zero;
-                break;
+                return Vector3.zero;
         }
-        return v;
     }
 
     void ClearTerrain(Transform _container)
@@ -390,7 +379,7 @@ public class LevelDataEditor : Editor
             float varianceCheck = Random.Range(0f, 1f);
             int variantIndex = Random.Range(0, 3);
 
-            bool waterfallBlock = false;
+
 
             switch (_tile.type)
             {
@@ -506,10 +495,12 @@ public class LevelDataEditor : Editor
 
                                 if (_t != null && w_tilesetList != null)
                                 {
-                                    //GridUtilities.GetAdjacentFromIndex(adj, i).isBlocked = true;
-                                    //tempGrid[GridUtilities.GetAdjacentFromIndex(adj, i).gridPos].isBlocked = true;
+
+                                    tempGrid[GridUtilities.GetAdjacentFromIndex(adj, i).gridPos].isBlocked = true;
+                                    tempGrid[GridUtilities.GetAdjacentFromIndex(adj, i).gridPos].waterfallBlock = true;
                                     
-                                    waterfallBlock = true;
+                                    Debug.Log(GridUtilities.GetAdjacentFromIndex(adj, i).gridPos);
+
                                     int h = _tile.height - tAdj.height;
                                     for (int j = 0; j < h + 1; j++)
                                     {
@@ -517,6 +508,8 @@ public class LevelDataEditor : Editor
                                         _instance.transform.rotation = Quaternion.Euler(0f, 90f * (i / 2), 0f);
                                         _instance.transform.position += Vector3.down * tileSize * (j == 0 ? 0 : (j >= 2 ? j - 1 : h));
                                     }
+
+                                    
                                 }
                             }
                         }
@@ -528,17 +521,23 @@ public class LevelDataEditor : Editor
                     break;
             }
 
+
             if (instance != null)
             {
                 Vector3 wordlPos = new Vector3((_tile.gridPos.x + 0.5f) * tileSize, 0, (_tile.gridPos.y +0.5f) * tileSize);
                 instance.transform.position = wordlPos;
 
                 instance.GetComponent<TileComponent>().gridPos = _tile.gridPos;
-                instance.GetComponent<TileGizmo>().hasBlocker = _tile.isBlocked && !waterfallBlock;
+                TileGizmo gizmo = instance.GetComponent<TileGizmo>();
+                gizmo.hasBlocker = tempGrid[_tile.gridPos].isBlocked && !tempGrid[_tile.gridPos].waterfallBlock;
 
-                _tile.associatedGO = instance;
-                if (_tile.type == Tile.Tile_Type.Water && waterfallBlock)
-                    _tile.isBlocked = true;
+                tempGrid[_tile.gridPos].associatedGO = instance;
+
+                if (_tile.node != null)
+                {
+                    GameObject nodeAsset = _tile.node.nodeModel;
+                    PrefabUtility.InstantiatePrefab(nodeAsset, gizmo.tileContent);
+                }
             }
         }
 

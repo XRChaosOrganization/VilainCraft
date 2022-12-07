@@ -23,7 +23,14 @@ public class LevelData : MonoBehaviour
     {
         serializableGrid.Clear();
         foreach (KeyValuePair<Vector2, Tile> pair in grid)
-            serializableGrid.Add(new Tile(pair.Key, pair.Value.type,  pair.Value.height));
+        {
+            Tile t = new Tile(pair.Key, pair.Value.type, pair.Value.height, pair.Value.isBlocked);
+            t.associatedGO = pair.Value.associatedGO;
+            t.node = pair.Value.node;
+
+            serializableGrid.Add(t);
+        }
+            
             
     }
 

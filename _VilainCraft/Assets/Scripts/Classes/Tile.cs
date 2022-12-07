@@ -15,6 +15,7 @@ public class Tile
     public Vector2 gridPos;
     public int height;
     public bool isBlocked;
+    public RawRessource node;
     public GameObject building;
     public GameObject associatedGO;
 
@@ -26,5 +27,15 @@ public class Tile
         isBlocked = _isBlocked;
 
     }
+
+
+
+
+#if UNITY_EDITOR
+
+
+    [HideInInspector] public bool waterfallBlock;
+
+#endif
 
 }
