@@ -38,8 +38,8 @@ Material:
     - _Depth: 1.35
     - _Distance: -38.5
     - _FarPlaneScale: 14.12
-    - _FoamAmount: 2.69
-    - _FoamCutoff: 1.68
+    - _FoamAmount: 1.98
+    - _FoamCutoff: 1.88
     - _FoamScale: 2.22
     - _FoamSpeed: 0.81
     - _Intensity: 2.18

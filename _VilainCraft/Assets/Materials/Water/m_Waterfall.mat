@@ -38,30 +38,35 @@ Material:
     - _Depth: 1.38
     - _Distance: -38.5
     - _FarPlaneScale: 14.12
-    - _FoamAmount: 0.82
-    - _FoamCutoff: 0.68
-    - _FoamScale: 3.18
+    - _FoamAmount: 2.69
+    - _FoamCutoff: 3.09
+    - _FoamScale: 2.22
     - _FoamSpeed: 2
     - _Intensity: 2.18
     - _Metallic: 0
     - _NormalPower: 0
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _RidgeIntensity: 2.47
     - _RipplesScale: 0.21
     - _RipplesSpeed: 2
+    - _Scale: 1.78
     - _Smoothness: 0
     - _Tiling: 0.5
-    - _WaterfallFoamCutoff: 3.55
-    - _WaterfallFoamScale: 8
-    - _WaterfallFoamSpeed: 1
+    - _WaterfallFoamCutoff: 0.81
+    - _WaterfallFoamScale: 2.03
+    - _WaterfallFoamSpeed: 1.46
     m_Colors:
     - _BaseColor: {r: 0.0495283, g: 0.1367164, b: 0.5, a: 1}
     - _DeepColor: {r: 0, g: 0.04231142, b: 0.1682695, a: 0.9215686}
+    - _DropSmoothstepEdge: {r: 0.63, g: 0.98, b: 0, a: 0}
     - _FoamColor: {r: 0.764151, g: 0.764151, b: 0.764151, a: 1}
+    - _RidgeSmoothstepEdge: {r: 0.44, g: 0.98, b: 0, a: 0}
+    - _RidgeTiling: {r: 1.84, g: 1, b: 0, a: 0}
     - _RipplesColor: {r: 0.13333334, g: 0.5411765, b: 0.7490196, a: 1}
     - _ShallowColor: {r: 0.05126947, g: 0.1912017, b: 0.4341537, a: 0.4823529}
-    - _SmoothstepEdge: {r: 0.7, g: 0.3, b: 0, a: 0}
-    - _WaterfallFoamTiling: {r: 6, g: 6, b: 0, a: 0}
+    - _SmoothstepEdge: {r: 0.3, g: 0.79, b: 0, a: 0}
+    - _WaterfallFoamTiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6806000575016488895
 MonoBehaviour:
