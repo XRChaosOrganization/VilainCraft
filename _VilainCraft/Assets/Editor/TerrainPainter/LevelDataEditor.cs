@@ -81,18 +81,18 @@ public class LevelDataEditor : Editor
 
                     if (genFactory)
                     {
-                        List<Tile> grid = GenerateGrid(factoryTilemap);
-                        levelData.serializableGrid = grid;
+                        List<Tile> gridF = GenerateGrid(factoryTilemap);
+                        levelData.serializableGrid = gridF;
                         levelData.LoadGrid();
                         TerrainToggle(MapGroup.Factory, true);
-                        Generate3DTerrain(grid, factoryTilemap.height.origin, MapGroup.Factory);
+                        Generate3DTerrain(gridF, factoryTilemap.height.origin, MapGroup.Factory);
                     }
 
                     if (genBattle)
                     {
-                        List<Tile> grid = GenerateGrid(battleTilemap);
+                        List<Tile> gridB = GenerateGrid(battleTilemap);
                         TerrainToggle(MapGroup.Battle, true);
-                        Generate3DTerrain(grid, battleTilemap.height.origin, MapGroup.Battle);
+                        Generate3DTerrain(gridB, battleTilemap.height.origin, MapGroup.Battle);
 
                     }
 
@@ -162,6 +162,8 @@ public class LevelDataEditor : Editor
                         if (clearFactory)
                         {
                             factoryTilemap.Clear();
+                            levelData.grid = null;
+                            levelData.serializableGrid = null;
                             ClearTerrain(GetContainer(MapGroup.Factory));
                         }
                             
@@ -202,8 +204,8 @@ public class LevelDataEditor : Editor
         if (factoryTilemap != null && battleTilemap != null)
             return;
 
-        Transform factoryTilemaps = levelData.transform.Find("Level Painter/FactoryMap");
-        Transform battleTilemaps = levelData.transform.Find("Level Painter/BattleMap");
+        Transform factoryTilemaps = levelData.transform.Find("PainterTilemaps/FactoryMap");
+        Transform battleTilemaps = levelData.transform.Find("PainterTilemaps/BattleMap");
 
         factoryTilemap = new TilemapGroup(
             factoryTilemaps.Find("Factory_HeightMap").GetComponent<Tilemap>(),
@@ -225,10 +227,11 @@ public class LevelDataEditor : Editor
         factoryTilemap.specialTiles.origin = factoryTilemap.height.origin;
 
         battleTilemap.height.CompressBounds();
-        battleTilemap.terrain.size = factoryTilemap.height.size;
-        battleTilemap.terrain.origin = factoryTilemap.height.origin;
-        battleTilemap.specialTiles.size = factoryTilemap.height.size;
-        battleTilemap.specialTiles.origin = factoryTilemap.height.origin;
+        battleTilemap.terrain.size = battleTilemap.height.size;
+        battleTilemap.terrain.origin = battleTilemap.height.origin;
+        battleTilemap.specialTiles.size = battleTilemap.height.size;
+        battleTilemap.specialTiles.origin = battleTilemap.height.origin;
+
     }
 
     List<Tile> GenerateGrid(TilemapGroup _tilemap)
@@ -242,14 +245,14 @@ public class LevelDataEditor : Editor
             {
                 Vector3Int p = new Vector3Int(i, j, 0);
 
-                if (factoryTilemap.height.GetTile(p) && factoryTilemap.terrain.GetTile(p))
+                if (_tilemap.height.GetTile(p) && _tilemap.terrain.GetTile(p))
                 {
-                    string sh = factoryTilemap.height.GetTile(p).name;
-                    string st = factoryTilemap.terrain.GetTile(p).name;
+                    string sh = _tilemap.height.GetTile(p).name;
+                    string st = _tilemap.terrain.GetTile(p).name;
                     string sx = new string("");
 
-                    if (factoryTilemap.specialTiles.GetTile(p))
-                        sx = factoryTilemap.specialTiles.GetTile(p).name;
+                    if (_tilemap.specialTiles.GetTile(p))
+                        sx = _tilemap.specialTiles.GetTile(p).name;
 
                     Tile t = new Tile(new Vector2Int(i, j), GetType(st), GetHeight(sh), sx == "TileBlocker");
                     t.node = GetNode(sx);
@@ -312,7 +315,9 @@ public class LevelDataEditor : Editor
             case MapGroup.Factory:
                 return levelData.transform.Find("FactoryMapTerrain");
             case MapGroup.Battle:
-                return levelData.transform.Find("BattleMapTerrain");
+                Transform t = levelData.transform.Find("BattleMapTerrain");
+                t.position = new Vector3(t.position.x, battleTilemap.height.transform.position.y, t.position.z);
+                return t;
             default:
                 return null;
         }
@@ -320,16 +325,12 @@ public class LevelDataEditor : Editor
 
     Vector3 GetOrigin(MapGroup _mapGroup)
     {
-        Vector3 temp;
-
         switch (_mapGroup)
         {
             case MapGroup.Factory:
-                temp = factoryTilemap.height.origin;
-                return new Vector3(temp.x, temp.z, temp.y);
+                return new Vector3(factoryTilemap.height.origin.x, 0, factoryTilemap.height.origin.y);
             case MapGroup.Battle:
-                temp = battleTilemap.height.origin;
-                return new Vector3(temp.x, temp.z, temp.y);
+                return new Vector3(factoryTilemap.height.origin.x, battleTilemap.height.transform.position.y, factoryTilemap.height.origin.y);
             default:
                 return Vector3.zero;
         }
@@ -525,7 +526,7 @@ public class LevelDataEditor : Editor
             if (instance != null)
             {
                 Vector3 wordlPos = new Vector3((_tile.gridPos.x + 0.5f) * tileSize, 0, (_tile.gridPos.y +0.5f) * tileSize);
-                instance.transform.position = wordlPos;
+                instance.transform.position = wordlPos + Vector3.up * container.position.y;
 
                 instance.GetComponent<TileComponent>().gridPos = _tile.gridPos;
                 TileGizmo gizmo = instance.GetComponent<TileGizmo>();
