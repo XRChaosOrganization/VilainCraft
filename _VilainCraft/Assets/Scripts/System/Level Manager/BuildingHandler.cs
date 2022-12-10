@@ -12,7 +12,7 @@ public class BuildingHandler : MonoBehaviour
     public bool IsBuildMode {get {return isBuildMode;} set { isBuildMode = value; GameEvents.current.DisplayGrid(value || alwaysDisplayGrid);}}
     bool isBuildMode;
 
-    Transform buildingContainer;
+    public Transform buildingContainer;
     public GameObject buildingStamp;
     public Building buildData;
     List<Pos_Type_Pair> nonVoidTiles;
@@ -26,10 +26,10 @@ public class BuildingHandler : MonoBehaviour
     private void Awake()
     {
         current = this;
-        Transform bc = transform.root.Find("BuildingContainer");
-        if (bc)
-            buildingContainer = bc;
-        else Debug.LogError("Cannot find Building Container in Scene");
+        //Transform bc = transform.root.Find("BuildingContainer");
+        //if (bc)
+        //    buildingContainer = bc;
+        //else Debug.LogError("Cannot find Building Container in Scene");
     }
 
     private void LateUpdate()

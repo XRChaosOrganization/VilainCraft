@@ -4,13 +4,15 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.InputSystem;
 
-public class CameraController : MonoBehaviour
+[ExecuteInEditMode]
+public class LevelCameraController : MonoBehaviour
 {
 
     public CinemachineBrain camBrain;
     public CinemachineVirtualCamera activeCam => (CinemachineVirtualCamera)camBrain.ActiveVirtualCamera;
-    public LevelCameraComponent levelCam => activeCam.GetComponentInParent<LevelCameraComponent>();
-    
+    public LevelVCamComponent levelCam => activeCam.GetComponentInParent<LevelVCamComponent>();
+
+
 
     // Start is called before the first frame update
     void Start()

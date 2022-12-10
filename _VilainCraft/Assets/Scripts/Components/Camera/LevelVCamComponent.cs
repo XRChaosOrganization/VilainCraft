@@ -4,10 +4,14 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.InputSystem;
 
-public class LevelCameraComponent : MonoBehaviour
+public class LevelVCamComponent : MonoBehaviour
 {
-    CinemachineVirtualCamera cam;
+    public CinemachineVirtualCamera cam;
+    public Transform focusPoint;
     CinemachineTrackedDolly dolly;
+
+    public BoundsInt cameraBounds;
+    public float farthestFOV;
 
     public AnimationCurve rotationLerp;
     public float lerpSpeed;
@@ -15,9 +19,10 @@ public class LevelCameraComponent : MonoBehaviour
     [HideInInspector] public static float zoomClosest = 18;
     [HideInInspector] public float zoomFarthest;
 
+
+
     private void Start()
     {
-        cam = GetComponentInChildren<CinemachineVirtualCamera>();
         dolly = cam.GetCinemachineComponent<CinemachineTrackedDolly>();
     }
 
@@ -47,7 +52,24 @@ public class LevelCameraComponent : MonoBehaviour
             dolly.m_PathPosition += 4;
         yield return null;
     }
-    
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawSphere(transform.position, 0.7f);
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireSphere(transform.position, 0.7f);
+
+        //Vector3 size = new Vector3(cameraBounds.xMax - cameraBounds.xMin, 0, cameraBounds.zMax - cameraBounds.zMin);
+
+        //Gizmos.DrawWireCube(transform.position, size);
+        Gizmos.DrawWireCube(cameraBounds.center, cameraBounds.size);
+    }
+
+    //public void SetBounds(BoundsInt tilemapBounds)
+    //{
+    //    cameraBounds.xMin = 
+    //}
 
 
 }

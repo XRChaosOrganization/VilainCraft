@@ -216,7 +216,7 @@ public class LevelConstructor : MonoBehaviour
             pos.z = mapData.heightMap.rect.height * tileSize / 2;
             cameraRig.position = pos;
             CinemachineVirtualCamera vcam = cameraRig.GetComponentInChildren<CinemachineVirtualCamera>();
-            LevelCameraComponent levelCam = cameraRig.GetComponent<LevelCameraComponent>();
+            LevelVCamComponent levelCam = cameraRig.GetComponent<LevelVCamComponent>();
             levelCam.zoomFarthest = Mathf.Max(mapData.heightMap.rect.width, mapData.heightMap.rect.height) * 1.5f + 9f; //Equation size = 1.5x + 9 comes from linear interpolation after experimenting 
             vcam.m_Lens.OrthographicSize = levelCam.zoomFarthest;
         }
