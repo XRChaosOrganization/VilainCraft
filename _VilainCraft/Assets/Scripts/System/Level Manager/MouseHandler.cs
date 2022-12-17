@@ -22,7 +22,7 @@ public class MouseHandler : MonoBehaviour
             tileComponent = hit.collider.GetComponentInParent<TileComponent>();
             gridCell_sr = tileComponent.tile_gridCell_sr;
             worldPos = tileComponent.transform.position;
-            GridManager.current.grid.TryGetValue(tileComponent.gridPos, out tile);
+            LevelData.current.grid.TryGetValue(tileComponent.gridPos, out tile);
             tileAnchor = worldPos + Vector3.up * tile.height * 4;
             gridPos = tileComponent.gridPos;
         }
@@ -58,6 +58,7 @@ public class MouseHandler : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, 999f, tileLayerMask))
         {
+
             if (hit.collider != tileCol)
             {
                 tile_mo = new Tile_MO(hit);

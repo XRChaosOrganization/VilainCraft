@@ -8,34 +8,83 @@ public class LevelVCamComponent : MonoBehaviour
 {
     public CinemachineVirtualCamera cam;
     public Transform focusPoint;
-    CinemachineTrackedDolly dolly;
+    public CinemachineTrackedDolly dolly;
 
     public BoundsInt cameraBounds;
+    public Bounds zoomedBounds;
     public float farthestFOV;
+    [HideInInspector] public static float closestFOV = 3f;
 
+    public float moveSpeed;
     public AnimationCurve rotationLerp;
     public float lerpSpeed;
     public float zoomStep;
-    [HideInInspector] public static float zoomClosest = 18;
-    [HideInInspector] public float zoomFarthest;
+    [HideInInspector] public static float zoomClosest = 3f;     //A virer
+    [HideInInspector] public float zoomFarthest;                //A virer
+
+    [HideInInspector] public Vector3 cameraDirUp;
+    [HideInInspector] public Vector3 cameraDirRight;
+    [HideInInspector] public Vector3 moveInput;
+    
+
 
 
 
     private void Start()
     {
         dolly = cam.GetCinemachineComponent<CinemachineTrackedDolly>();
+        GetCameraDir(Mathf.RoundToInt(dolly.m_PathPosition));
+    }
+
+    private void Update()
+    {
+        HandleMovement();
     }
 
     public void Rotate(InputAction.CallbackContext context)
     {
         float value = context.ReadValue<float>();
+
+        int i = Mathf.RoundToInt(dolly.m_PathPosition + value) % 4;
+        if (i < 0)
+            i += 4;
+        GetCameraDir(i);
+
         StartCoroutine(RotateCoroutine(value > 0 ? 1 : -1));
+        
     }
 
     public void Zoom(float z)
     {
-        cam.m_Lens.OrthographicSize = Mathf.Clamp(cam.m_Lens.OrthographicSize + z * zoomStep, zoomClosest, zoomFarthest);
+
+        cam.m_Lens.FieldOfView = Mathf.Clamp(cam.m_Lens.FieldOfView + z * zoomStep, closestFOV, farthestFOV);
+        float f = (farthestFOV - cam.m_Lens.FieldOfView) / (farthestFOV - closestFOV);
+        zoomedBounds = new Bounds(cameraBounds.center, (Vector3)cameraBounds.size * f);
+        HandleMovement();
+
+        //cam.m_Lens.OrthographicSize = Mathf.Clamp(cam.m_Lens.OrthographicSize + z * zoomStep, zoomClosest, zoomFarthest);
+
     }
+
+    void HandleMovement()
+    {
+        Vector3 dir = (cameraDirUp * moveInput.y + cameraDirRight * moveInput.x).normalized;
+        Vector3 newPos = focusPoint.position + dir * moveSpeed;
+        Vector3 clampedPos = new Vector3(Mathf.Clamp(newPos.x, zoomedBounds.min.x, zoomedBounds.max.x), 0f, Mathf.Clamp(newPos.z, zoomedBounds.min.z, zoomedBounds.max.z));
+        focusPoint.position = clampedPos;
+
+
+    }
+
+
+    void GetCameraDir(int i)
+    {
+        Vector3 pathPos = dolly.m_Path.EvaluatePosition(i);
+        cameraDirUp = new Vector3(-pathPos.x/Mathf.Abs(pathPos.x), 0f, -pathPos.z/ Mathf.Abs(pathPos.z));
+        cameraDirRight = new Vector3(cameraDirUp.z, 0f, -cameraDirUp.x); // Rotate vector 90° Clockwise : (x , y) -> (y , -x)
+    }
+
+
 
     IEnumerator RotateCoroutine(int i)
     {
@@ -53,23 +102,27 @@ public class LevelVCamComponent : MonoBehaviour
         yield return null;
     }
 
+
+
+
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.cyan;
-        Gizmos.DrawSphere(transform.position, 0.7f);
+        Gizmos.DrawSphere(focusPoint.position, 0.7f);
         Gizmos.color = Color.black;
-        Gizmos.DrawWireSphere(transform.position, 0.7f);
+        Gizmos.DrawWireSphere(focusPoint.position, 0.7f);
 
-        //Vector3 size = new Vector3(cameraBounds.xMax - cameraBounds.xMin, 0, cameraBounds.zMax - cameraBounds.zMin);
-
-        //Gizmos.DrawWireCube(transform.position, size);
         Gizmos.DrawWireCube(cameraBounds.center, cameraBounds.size);
+
+
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireCube(zoomedBounds.center, zoomedBounds.size);
+
+
     }
 
-    //public void SetBounds(BoundsInt tilemapBounds)
-    //{
-    //    cameraBounds.xMin = 
-    //}
+
 
 
 }

@@ -14,6 +14,9 @@ public static class CreateUtility
         Place(newObject);
         if (!asPrefab)
             PrefabUtility.UnpackPrefabInstance(newObject, PrefabUnpackMode.OutermostRoot, InteractionMode.AutomatedAction);
+        GameObject unpack = newObject.transform.Find("Level Scene").gameObject;
+        if (unpack)
+            PrefabUtility.UnpackPrefabInstance(unpack, PrefabUnpackMode.OutermostRoot, InteractionMode.AutomatedAction);
     }
 
     public static void CreateObject(string name, params Type[] types)

@@ -80,19 +80,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 5826038311592147663}
   focusPoint: {fileID: 5826038313011688907}
+  dolly: {fileID: 0}
   cameraBounds:
     m_Position: {x: 4, y: 0, z: 4}
     m_Size: {x: -4, y: 0, z: -4}
+  zoomedBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   farthestFOV: 0.63860995
+  moveSpeed: 0.2
   rotationLerp:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  lerpSpeed: 0
-  zoomStep: 0
+  lerpSpeed: 3
+  zoomStep: 0.2
   zoomFarthest: 0
+  cameraDirUp: {x: 0, y: 0, z: 0}
+  cameraDirRight: {x: 0, y: 0, z: 0}
+  moveInput: {x: 0, y: 0, z: 0}
 --- !u!1 &1350379392478368950
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 5174048612030180180}
-  m_PathPosition: 0
+  m_PathPosition: 1
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
   m_XDamping: 0
@@ -285,7 +311,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2555474863171495785}
-  m_LocalRotation: {x: 0.26053974, y: 0.36715135, z: -0.107919104, w: 0.8863817}
+  m_LocalRotation: {x: 0.26053974, y: -0.36715132, z: 0.1079191, w: 0.8863817}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -315,10 +341,10 @@ MonoBehaviour:
   m_LookAt: {fileID: 1281889015669960154}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 0.63860995
+    FieldOfView: 3.5
     OrthographicSize: 32.5
-    NearClipPlane: 331
-    FarClipPlane: 526.69
+    NearClipPlane: 300
+    FarClipPlane: 600
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
@@ -443,19 +469,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 4895317637326898701}
   focusPoint: {fileID: 1281889015669960154}
+  dolly: {fileID: 0}
   cameraBounds:
     m_Position: {x: 4, y: 200, z: 4}
     m_Size: {x: -4, y: 0, z: -4}
+  zoomedBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   farthestFOV: 0.63860995
+  moveSpeed: 0.2
   rotationLerp:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  lerpSpeed: 0
-  zoomStep: 0
+  lerpSpeed: 3
+  zoomStep: 0.2
   zoomFarthest: 0
+  cameraDirUp: {x: 0, y: 0, z: 0}
+  cameraDirRight: {x: 0, y: 0, z: 0}
+  moveInput: {x: 0, y: 0, z: 0}
 --- !u!1 &5826038311592147657
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,7 +532,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5826038311592147657}
-  m_LocalRotation: {x: 0.26274797, y: 0.36688122, z: -0.10883378, w: 0.8857296}
+  m_LocalRotation: {x: 0.26274797, y: -0.36688122, z: 0.10883378, w: 0.8857296}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -510,7 +562,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 5826038313011688907}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 0.63860995
+    FieldOfView: 3.5
     OrthographicSize: 32.5
     NearClipPlane: 300
     FarClipPlane: 600
@@ -672,7 +724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 5826038311893562914}
-  m_PathPosition: 0
+  m_PathPosition: 1
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
   m_XDamping: 0

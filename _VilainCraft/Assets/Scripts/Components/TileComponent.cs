@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class TileComponent : MonoBehaviour /*, IPointerEnterHandler , IPointerExitHandler*/  
 {
     public Vector2 gridPos;
-    [HideInInspector]public SpriteRenderer tile_gridCell_sr;
+    [HideInInspector] public SpriteRenderer tile_gridCell_sr;
 
 
 

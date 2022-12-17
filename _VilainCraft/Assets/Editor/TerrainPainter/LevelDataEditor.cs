@@ -686,6 +686,9 @@ public class LevelDataEditor : Editor
         fov *= Mathf.Rad2Deg;
         cameraComponent.cam.m_Lens.FieldOfView = fov;
         cameraComponent.farthestFOV = fov;
+        cameraComponent.zoomedBounds = new Bounds(cameraComponent.cameraBounds.center, Vector3.zero);
+
+        
 
     }
 
