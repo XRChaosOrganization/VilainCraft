@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MouseHandler : MonoBehaviour
 {
     public static MouseHandler current;
@@ -28,11 +29,11 @@ public class MouseHandler : MonoBehaviour
         }
     }
 
-    public Vector3 screenPoint;
-
-    [Header("Tile")]    
+    
+    [HideInInspector] public Vector3 screenPoint;
+    [Space(15)]
     public LayerMask tileLayerMask;
-    public Tile_MO tile_mo;
+    [HideInInspector]public Tile_MO tile_mo;
     Collider tileCol;
 
     //Ajouter un Header pour les Buildings

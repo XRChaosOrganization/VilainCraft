@@ -6,7 +6,7 @@ using UnityEngine;
 public class LevelData : MonoBehaviour
 {
     public static LevelData current;
-    public List<Tile> serializableGrid = new List<Tile>();
+    [HideInInspector]public List<Tile> serializableGrid = new List<Tile>();
     public Dictionary<Vector2, Tile> grid = new Dictionary<Vector2, Tile>();
 
 

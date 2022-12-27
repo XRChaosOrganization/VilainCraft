@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class TileComponent : MonoBehaviour /*, IPointerEnterHandler , IPointerExitHandler*/  
+public class TileComponent : MonoBehaviour 
 {
-    public Vector2 gridPos;
+    [HideInInspector] public Vector2 gridPos;
     [HideInInspector] public SpriteRenderer tile_gridCell_sr;
 
 
