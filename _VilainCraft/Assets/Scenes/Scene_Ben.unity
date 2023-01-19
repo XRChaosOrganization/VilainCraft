@@ -4941,6 +4941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camBrain: {fileID: 977836037}
+  edgeScrollSize: 0.201
 --- !u!114 &977836039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5019,7 +5020,7 @@ MonoBehaviour:
     m_ActionId: ab5ee766-5929-483c-a0a0-03a12b060196
     m_ActionName: BuildModeControls/Rotate[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: KeyboardAndMouse
+  m_DefaultControlScheme: 
   m_DefaultActionMap: CameraControls
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -9499,7 +9500,7 @@ MonoBehaviour:
     m_Center: {x: 10, y: 0, z: 14}
     m_Extent: {x: 0, y: 0, z: 0}
   farthestFOV: 6.5600343
-  moveSpeed: 0.2
+  moveSpeed: 30
   rotationLerp:
     serializedVersion: 2
     m_Curve:
@@ -9525,11 +9526,11 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   lerpSpeed: 3
-  zoomStep: 0.2
+  zoomStep: 30
   zoomFarthest: 0
   cameraDirUp: {x: 0, y: 0, z: 0}
   cameraDirRight: {x: 0, y: 0, z: 0}
-  moveInput: {x: 0, y: 0, z: 0}
+  moveInput: {x: -1, y: 1, z: 0}
 --- !u!114 &3103211005276100068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9552,7 +9553,7 @@ MonoBehaviour:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   farthestFOV: 0.63860995
-  moveSpeed: 0.2
+  moveSpeed: 30
   rotationLerp:
     serializedVersion: 2
     m_Curve:
@@ -9578,7 +9579,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   lerpSpeed: 3
-  zoomStep: 0.2
+  zoomStep: 30
   zoomFarthest: 0
   cameraDirUp: {x: 0, y: 0, z: 0}
   cameraDirRight: {x: 0, y: 0, z: 0}
@@ -9708,7 +9709,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5249091945879849945
 Transform:
   m_ObjectHideFlags: 0
@@ -14643,6 +14644,22 @@ PrefabInstance:
     - target: {fileID: 1378662454234317486, guid: 193522078ba626f4bb35d216b5373181, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378662455664181501, guid: 193522078ba626f4bb35d216b5373181, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378662455664181501, guid: 193522078ba626f4bb35d216b5373181, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378662455664181501, guid: 193522078ba626f4bb35d216b5373181, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionId
+      value: 9b55bec3-f401-469e-b537-caec0ccd7afc
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378662455664181501, guid: 193522078ba626f4bb35d216b5373181, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionName
+      value: CameraControls/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 193522078ba626f4bb35d216b5373181, type: 3}

@@ -57,7 +57,7 @@ public class LevelVCamComponent : MonoBehaviour
     public void Zoom(float z)
     {
 
-        cam.m_Lens.FieldOfView = Mathf.Clamp(cam.m_Lens.FieldOfView + z * zoomStep, closestFOV, farthestFOV);
+        cam.m_Lens.FieldOfView = Mathf.Clamp(cam.m_Lens.FieldOfView + z * zoomStep * Time.deltaTime, closestFOV, farthestFOV);
         float f = (farthestFOV - cam.m_Lens.FieldOfView) / (farthestFOV - closestFOV);
         zoomedBounds = new Bounds(cameraBounds.center, (Vector3)cameraBounds.size * f);
         HandleMovement();
@@ -69,7 +69,7 @@ public class LevelVCamComponent : MonoBehaviour
     void HandleMovement()
     {
         Vector3 dir = (cameraDirUp * moveInput.y + cameraDirRight * moveInput.x).normalized;
-        Vector3 newPos = focusPoint.position + dir * moveSpeed;
+        Vector3 newPos = focusPoint.position + dir * moveSpeed * Time.deltaTime;
         Vector3 clampedPos = new Vector3(Mathf.Clamp(newPos.x, zoomedBounds.min.x, zoomedBounds.max.x), 0f, Mathf.Clamp(newPos.z, zoomedBounds.min.z, zoomedBounds.max.z));
         focusPoint.position = clampedPos;
 
