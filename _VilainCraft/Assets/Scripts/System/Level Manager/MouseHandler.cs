@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,6 +32,10 @@ public class MouseHandler : MonoBehaviour
 
     
     [HideInInspector] public Vector3 screenPoint;
+
+    Plane voidPlane;
+    [HideInInspector] public Vector3 voidPos;
+
     [Space(15)]
     public LayerMask tileLayerMask;
     [HideInInspector]public Tile_MO tile_mo;
@@ -41,17 +46,28 @@ public class MouseHandler : MonoBehaviour
     private void Awake()
     {
         current = this;
+        voidPlane = new Plane(Vector3.up, -4f);
     }
 
     private void LateUpdate()
     {
         MouseToScreenPoint();
         TileMouseOver();
-        
+        VoidMouseOver();
     }
 
 
     #region Methods
+
+    private void VoidMouseOver()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        float enter;
+        if (voidPlane.Raycast(ray, out enter))
+            voidPos = ray.GetPoint(enter);
+
+    }
 
     void TileMouseOver()
     {

@@ -26,10 +26,6 @@ public class BuildingHandler : MonoBehaviour
     private void Awake()
     {
         current = this;
-        //Transform bc = transform.root.Find("BuildingContainer");
-        //if (bc)
-        //    buildingContainer = bc;
-        //else Debug.LogError("Cannot find Building Container in Scene");
     }
 
     private void LateUpdate()
@@ -54,6 +50,22 @@ public class BuildingHandler : MonoBehaviour
         r.materials[0].color = c;
 
         IsBuildMode = true;
+    }
+
+    public void Rotate(InputAction.CallbackContext context)
+    {
+        if (isBuildMode && context.started)
+        {
+            List<Pos_Type_Pair> rotatedTiles = new List<Pos_Type_Pair>();
+            foreach (var pair in nonVoidTiles)
+            {
+                Pos_Type_Pair rotatedPair = new Pos_Type_Pair(Vector2.Perpendicular(pair.gridPos), pair.tileType);
+                rotatedTiles.Add(rotatedPair);
+            }
+
+            nonVoidTiles = new List<Pos_Type_Pair>(rotatedTiles);
+            buildingPreview.transform.Rotate(new Vector3(0, -90, 0));
+        }
     }
 
     void HandleBuildingStamp()
@@ -88,32 +100,16 @@ public class BuildingHandler : MonoBehaviour
             }
 
 
-            buildingPreview.transform.position = MouseHandler.current.tile_mo != null ? MouseHandler.current.tile_mo.tileAnchor : MouseHandler.current.screenPoint;
+            buildingPreview.transform.position = MouseHandler.current.tile_mo != null ? MouseHandler.current.tile_mo.tileAnchor : MouseHandler.current.voidPos; /*MouseHandler.current.screenPoint*/
 
 
             if (Input.GetMouseButtonDown(0) && canBuild)
             {
                 Instantiate(buildingStamp, MouseHandler.current.tile_mo.tileAnchor, buildingPreview.transform.rotation, buildingContainer);
                 foreach (var pair in nonVoidTiles)
-                    GridManager.current.grid[MouseHandler.current.tile_mo.gridPos + pair.gridPos].building = buildingStamp;
+                    LevelData.current.grid[MouseHandler.current.tile_mo.gridPos + pair.gridPos].building = buildingStamp;
 
             }
-        }
-    }
-
-    public void Rotate(InputAction.CallbackContext context)
-    {
-        if (isBuildMode && context.started)
-        {
-            List<Pos_Type_Pair> rotatedTiles = new List<Pos_Type_Pair>();
-            foreach (var pair in nonVoidTiles)
-            {
-                Pos_Type_Pair rotatedPair = new Pos_Type_Pair(Vector2.Perpendicular(pair.gridPos), pair.tileType);
-                rotatedTiles.Add(rotatedPair);
-            }
-
-            nonVoidTiles = new List<Pos_Type_Pair>(rotatedTiles);
-            buildingPreview.transform.Rotate(new Vector3(0, -90, 0));
         }
     }
 
@@ -126,20 +122,17 @@ public class BuildingHandler : MonoBehaviour
         foreach (var tile in nonVoidTiles)
         {
             Vector2 targetTile = MouseHandler.current.tile_mo.gridPos + tile.gridPos;
-            if (!GridManager.current.grid.ContainsKey(targetTile))
+            if (!LevelData.current.grid.ContainsKey(targetTile))
                 return false;
 
-            if (GridManager.current.grid[targetTile].height != MouseHandler.current.tile_mo.tile.height)
+            if (LevelData.current.grid[targetTile].height != MouseHandler.current.tile_mo.tile.height)
                 return false;
 
-            if (GridManager.current.grid[targetTile].type != tile.tileType  || GridManager.current.grid[targetTile].building != null)
+            if (LevelData.current.grid[targetTile].type != tile.tileType  || LevelData.current.grid[targetTile].building != null)
                 return false;
         }
 
         return true;
     }
-
-
-
 
 }
