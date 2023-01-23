@@ -11,8 +11,6 @@ public class LevelData : MonoBehaviour
 
 
 
-
-
     private void Awake()
     {
         current = this;
@@ -30,17 +28,11 @@ public class LevelData : MonoBehaviour
 
             serializableGrid.Add(t);
         }
-            
-            
     }
 
     public void LoadGrid()
     {
         foreach (Tile tile in serializableGrid)
             grid[tile.gridPos] = tile;
-        
-
-        
-
     }
 }

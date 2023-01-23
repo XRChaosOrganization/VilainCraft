@@ -4,7 +4,7 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.InputSystem;
 
-[ExecuteInEditMode]
+
 public class LevelCameraController : MonoBehaviour
 {
 
@@ -15,6 +15,9 @@ public class LevelCameraController : MonoBehaviour
     [Tooltip("In % of screen size")]
     [Range(0f,0.3f)] public float edgeScrollSize;
 
+    Vector2 moveDir;
+
+
 
 
     void Start()
@@ -22,11 +25,14 @@ public class LevelCameraController : MonoBehaviour
         camBrain = GetComponent<CinemachineBrain>();
     }
 
-    private void LateUpdate()
+    private void Update()
     {
-        EdgeScroll();
+        HandleMove();
     }
 
+
+
+    #region Public Methods
     public void Rotate(InputAction.CallbackContext context)
     {
         if (levelCam && context.started)
@@ -35,18 +41,26 @@ public class LevelCameraController : MonoBehaviour
 
     public void Zoom(InputAction.CallbackContext context)
     {
-        float z = Mathf.Clamp(context.ReadValue<Vector2>().y, -1f, 1f);
-        if (levelCam )
+        float z = Mathf.Clamp(-context.ReadValue<Vector2>().y, -1f, 1f);
+        if (levelCam)
             levelCam.Zoom(z);
     }
 
     public void Move(InputAction.CallbackContext context)
     {
-        levelCam.moveInput = context.ReadValue<Vector2>();
+        moveDir = context.ReadValue<Vector2>();
+    }
+
+    #endregion
+
+    #region Private Methods
+    void HandleMove()
+    {
+        levelCam.moveInput = moveDir != Vector2.zero ? moveDir : EdgeScroll();
     }
 
 
-    void EdgeScroll()
+    Vector2 EdgeScroll()
     {
         Vector2 edgeScroll = Vector2.zero;
 
@@ -59,15 +73,16 @@ public class LevelCameraController : MonoBehaviour
         if (Input.mousePosition.y >= Screen.height * (1 - edgeScrollSize / 2))
             edgeScroll.y = 1;
 
-        levelCam.moveInput = edgeScroll;
+        return edgeScroll;
     }
 
+    #endregion
 
-
+    #region Gizmo
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        
+
         Vector3 pos = transform.position + transform.forward * activeCam.m_Lens.NearClipPlane;
         Vector3[] frustum = new Vector3[4];
         Vector3[] corners = new Vector3[4];
@@ -81,13 +96,11 @@ public class LevelCameraController : MonoBehaviour
         corners[3] = pos + transform.right * size.x * (1 - edgeScrollSize) - transform.up * size.y * (1 - edgeScrollSize);
 
         for (int i = 0; i < corners.Length; i++)
-            Gizmos.DrawLine(corners[i], corners[(i+1)%4]);
-
+            Gizmos.DrawLine(corners[i], corners[(i + 1) % 4]);
 
     }
 
-
-
+    #endregion
 }
 
 

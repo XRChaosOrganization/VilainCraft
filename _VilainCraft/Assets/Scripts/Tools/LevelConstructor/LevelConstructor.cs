@@ -217,8 +217,8 @@ public class LevelConstructor : MonoBehaviour
             cameraRig.position = pos;
             CinemachineVirtualCamera vcam = cameraRig.GetComponentInChildren<CinemachineVirtualCamera>();
             LevelVCamComponent levelCam = cameraRig.GetComponent<LevelVCamComponent>();
-            levelCam.zoomFarthest = Mathf.Max(mapData.heightMap.rect.width, mapData.heightMap.rect.height) * 1.5f + 9f; //Equation size = 1.5x + 9 comes from linear interpolation after experimenting 
-            vcam.m_Lens.OrthographicSize = levelCam.zoomFarthest;
+            //levelCam.zoomFarthest = Mathf.Max(mapData.heightMap.rect.width, mapData.heightMap.rect.height) * 1.5f + 9f; //Equation size = 1.5x + 9 comes from linear interpolation after experimenting 
+            //vcam.m_Lens.OrthographicSize = levelCam.zoomFarthest;
         }
         else Debug.LogWarning("Failed To place Camera. levelConstructor.cameraRig null reference exception");
     }

@@ -19,14 +19,11 @@ public class LevelVCamComponent : MonoBehaviour
     public AnimationCurve rotationLerp;
     public float lerpSpeed;
     public float zoomStep;
-    [HideInInspector] public static float zoomClosest = 3f;     //A virer
-    [HideInInspector] public float zoomFarthest;                //A virer
 
     [HideInInspector] public Vector3 cameraDirUp;
     [HideInInspector] public Vector3 cameraDirRight;
     [HideInInspector] public Vector3 moveInput;
     
-
 
 
 
@@ -41,6 +38,9 @@ public class LevelVCamComponent : MonoBehaviour
         HandleMovement();
     }
 
+
+
+    #region Public Methods
     public void Rotate(InputAction.CallbackContext context)
     {
         float value = context.ReadValue<float>();
@@ -51,7 +51,6 @@ public class LevelVCamComponent : MonoBehaviour
         GetCameraDir(i);
 
         StartCoroutine(RotateCoroutine(value > 0 ? 1 : -1));
-        
     }
 
     public void Zoom(float z)
@@ -61,29 +60,27 @@ public class LevelVCamComponent : MonoBehaviour
         float f = (farthestFOV - cam.m_Lens.FieldOfView) / (farthestFOV - closestFOV);
         zoomedBounds = new Bounds(cameraBounds.center, (Vector3)cameraBounds.size * f);
         HandleMovement();
-
-        //cam.m_Lens.OrthographicSize = Mathf.Clamp(cam.m_Lens.OrthographicSize + z * zoomStep, zoomClosest, zoomFarthest);
-
     }
 
+    #endregion
+
+    #region Private Methods
     void HandleMovement()
     {
+        Debug.Log(moveInput);
         Vector3 dir = (cameraDirUp * moveInput.y + cameraDirRight * moveInput.x).normalized;
         Vector3 newPos = focusPoint.position + dir * moveSpeed * Time.deltaTime;
         Vector3 clampedPos = new Vector3(Mathf.Clamp(newPos.x, zoomedBounds.min.x, zoomedBounds.max.x), 0f, Mathf.Clamp(newPos.z, zoomedBounds.min.z, zoomedBounds.max.z));
         focusPoint.position = clampedPos;
-
-
     }
 
 
     void GetCameraDir(int i)
     {
         Vector3 pathPos = dolly.m_Path.EvaluatePosition(i);
-        cameraDirUp = new Vector3(-pathPos.x/Mathf.Abs(pathPos.x), 0f, -pathPos.z/ Mathf.Abs(pathPos.z));
+        cameraDirUp = new Vector3(-pathPos.x / Mathf.Abs(pathPos.x), 0f, -pathPos.z / Mathf.Abs(pathPos.z));
         cameraDirRight = new Vector3(cameraDirUp.z, 0f, -cameraDirUp.x); // Rotate vector 90° Clockwise : (x , y) -> (y , -x)
     }
-
 
 
     IEnumerator RotateCoroutine(int i)
@@ -102,10 +99,9 @@ public class LevelVCamComponent : MonoBehaviour
         yield return null;
     }
 
+    #endregion
 
-
-
-
+    #region Gizmo
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.cyan;
@@ -118,11 +114,7 @@ public class LevelVCamComponent : MonoBehaviour
 
         Gizmos.color = Color.white;
         Gizmos.DrawWireCube(zoomedBounds.center, zoomedBounds.size);
-
-
     }
 
-
-
-
+    #endregion
 }
