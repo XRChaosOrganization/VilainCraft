@@ -3,27 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class GameEvents : MonoBehaviour
+namespace CustomEvents
 {
-    public static GameEvents current;
-    private void Awake()
+    public class GameEvents : MonoBehaviour
     {
-        current = this;
-    }
-
-    #region Events
-
-    public event Action<bool> onDisplayGrid;
-    public void DisplayGrid(bool b)
-    {
-        if (onDisplayGrid != null)
+        public static GameEvents current;
+        private void Awake()
         {
-            onDisplayGrid(b);
+            current = this;
         }
+
+        #region Events
+
+        public event Action<bool> onDisplayGrid;
+        public void DisplayGrid(bool b)
+        {
+            if (onDisplayGrid != null)
+            {
+                onDisplayGrid(b);
+            }
+        }
+
+
+
+
+        #endregion
     }
 
-
-
-
-    #endregion
 }
